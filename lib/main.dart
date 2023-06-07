@@ -1,4 +1,4 @@
-///import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: HomeScreen(),
     );
   }
@@ -26,73 +26,74 @@ class HomeScreen extends StatelessWidget {
         title: Text('Basic Widgets'),
         centerTitle: true,
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.mail),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              color: Colors.teal,
-              height: 100,
-              width: 200,
-              margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              padding: EdgeInsets.all(10),
-              alignment: Alignment.center,
-              child: Text(
-                'Hello Ferdous',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            Container(
-              height: 100,
-              width: 200,
-              decoration: BoxDecoration(
-                color: Colors.limeAccent,
-                border: Border.all(color: Colors.black87, width: 5),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              margin: EdgeInsets.all(10),
-              alignment: Alignment.center,
-              child: Text(
-                'Hello Ferdous',
-                style: TextStyle(
-                  color: Colors.redAccent,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Icon(
-              Icons.access_alarm,
-              color: Colors.black,
-              size: 50,
-              fill: 1,
-            ),
-            Image.network(
-              ///  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-              'https://1.bp.blogspot.com/-N9urImzUkzw/UWjpuBgRnoI/AAAAAAAA_Qc/SJNkxoaCBRc/s1600/NATOT133.JPG',
-              width: 500,
-              height: 100,
-              fit: BoxFit.contain,
-            ),
-            Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Image.asset(
-                  'assets/img.png',
-                  width: 500,
-                  height: 100,
-                )),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                    backgroundColor: Colors.lightGreen,
+                    minimumSize: Size(50, 50),
+                    maximumSize: Size(100, 100),
+                    elevation: 15,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    shadowColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(500),
+                      side: BorderSide(color: Colors.green, width: 3),
+                    )),
+                onPressed: () {},
+                child: Text('Button')),
+            TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.white24,
+                    elevation: 15,
+                    shadowColor: Colors.black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    )),
+                onPressed: () {},
+                child: Text('Text Button')),
+            OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  foregroundColor: Colors.black,
+                  textStyle: TextStyle(fontSize: 15),
+                  elevation: 15,
+                  shadowColor: Colors.blue,
                 ),
                 onPressed: () {},
-                child: Text(
-                  'Button',
-                  style: TextStyle(fontSize: 20),
-                )),
+                child: Text('Outlineed Button')),
+            IconButton(
+                style: IconButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.black,
+                  iconSize: 5550,
+                  shadowColor: Colors.black,
+                  elevation: 15,
+                ),
+                onPressed: () {},
+                icon: Icon(Icons.add_call)),
+            GestureDetector(
+              onTap: () {
+                print('Pressed');
+              },
+              onDoubleTap: () {
+                print('Double pressed');
+              },
+              onLongPress: () {
+                print('Long Pressed');
+              },
+              child: Image.asset(
+                'assets/img.png',
+                width: 100,
+              ),
+            )
           ],
         ),
       ),
