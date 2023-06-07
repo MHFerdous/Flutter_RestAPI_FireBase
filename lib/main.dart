@@ -131,6 +131,60 @@ class HomeScreen extends StatelessWidget {
                     child: Text('Card is added'),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Enter your name: ',
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.teal, width: 3),
+                      ),
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your ID: ',
+                      border: OutlineInputBorder(),
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your email: ',
+                      border: OutlineInputBorder(),
+                    ),
+                    textInputAction: TextInputAction.next,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Enter your password: ',
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
+                    onChanged: (value) {
+                      print(value);
+                    },
+                    onSubmitted: (value) {
+                      print(value);
+                    },
+                    textAlign: TextAlign.start,
+                  ),
+                ),
               ],
             ),
           ),
