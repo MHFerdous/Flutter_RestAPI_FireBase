@@ -27,14 +27,21 @@ class HomeScreen extends StatelessWidget {
           'Intro to widgets',
           textAlign: TextAlign.start,
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.w700,
             wordSpacing: 0.5,
             letterSpacing: 0.5,
             fontSize: 20,
-            decoration: TextDecoration.underline,
+            //decoration: TextDecoration.underline,
           ),
         ),
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+        ],
         backgroundColor: Colors.black38,
         centerTitle: true,
       ),
