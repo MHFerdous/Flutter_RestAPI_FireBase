@@ -60,6 +60,22 @@ class HomeScreen extends StatelessWidget {
             tileColor: Colors.grey.shade300,
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
           ),
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            spacing: 20,
+            //direction: Axis.vertical,
+            children: [
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+              ElevatedButton(onPressed: () {}, child: Text('Hello')),
+            ],
+          )
         ],
       )),
     );
