@@ -22,27 +22,73 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-      title: Text(
-        'Chats',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontStyle: FontStyle.italic,
-          fontSize: 25,
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Welcome',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.arrow_back),
+        ),
+        backgroundColor: Colors.pink,
+        centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                      label: Text(
+                        'Mobile number or email',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                      //hintText: 'Enter your name',
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black, width: 2),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
+                        borderRadius: BorderRadius.circular(15),
+                      )),
+                  textInputAction: TextInputAction.next,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    label: Text(
+                      'Password',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.send,
+                  obscureText: true,
+                ),
+              )
+            ],
+          ),
         ),
       ),
-      leading: IconButton(
-        onPressed: () {},
-        icon: Icon(Icons.menu),
-      ),
-      actions: [
-        IconButton(onPressed: () {}, icon: Icon(Icons.add_a_photo_outlined)),
-        IconButton(onPressed: () {}, icon: Icon(Icons.add_call)),
-      ],
-          backgroundColor: Colors.black,
-
-    ));
+    );
   }
 }
