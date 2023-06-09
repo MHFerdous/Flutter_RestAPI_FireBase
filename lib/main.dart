@@ -1,83 +1,48 @@
+//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(
-    MyApp(appName: 'Hello App'),
-  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String appName;
-
-  const MyApp({required this.appName});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: appName, home: HomeScreen());
+    return const MaterialApp(
+      home: HomeScreen(),
+    );
   }
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'Intro to widgets',
-          textAlign: TextAlign.start,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            wordSpacing: 0.5,
-            letterSpacing: 0.5,
-            fontSize: 20,
-            //decoration: TextDecoration.underline,
-          ),
+        appBar: AppBar(
+      title: Text(
+        'Chats',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+          fontStyle: FontStyle.italic,
+          fontSize: 25,
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-        ],
-        backgroundColor: Colors.black38,
-        centerTitle: true,
       ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListTile(
-            onTap: () {
-              print('tapped');
-            },
-            title: Text('User Name'),
-            subtitle: Text('Designation'),
-            leading: Icon(Icons.account_circle_rounded),
-            trailing: Icon(Icons.volume_mute_rounded),
-            tileColor: Colors.grey.shade300,
-            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            spacing: 20,
-            //direction: Axis.vertical,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-            ],
-          )
-        ],
-      )),
-    );
+      leading: IconButton(
+        onPressed: () {},
+        icon: Icon(Icons.menu),
+      ),
+      actions: [
+        IconButton(onPressed: () {}, icon: Icon(Icons.add_a_photo_outlined)),
+        IconButton(onPressed: () {}, icon: Icon(Icons.add_call)),
+      ],
+          backgroundColor: Colors.black,
+
+    ));
   }
 }
