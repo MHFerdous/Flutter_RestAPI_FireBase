@@ -60,6 +60,19 @@ class HomeScreen extends StatelessWidget {
             tileColor: Colors.grey.shade300,
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
           ),
+          SizedBox(height: 10,),
+          ListTile(
+            onTap: () {
+              print('tapped');
+            },
+            title: Text('User Name'),
+            subtitle: Text('Designation'),
+            leading: Icon(Icons.account_circle_rounded),
+            trailing: Icon(Icons.volume_mute_rounded),
+            tileColor: Colors.grey.shade300,
+            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+          ),
+
         ],
       )),
     );
