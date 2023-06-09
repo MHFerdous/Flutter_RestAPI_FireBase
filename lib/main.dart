@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          'Welcome',
+          'Welcome to Facebook',
           style: TextStyle(
             color: Colors.white,
           ),
@@ -42,6 +42,16 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              IconButton(
+                style: IconButton.styleFrom(
+                  foregroundColor: Colors.blue,
+                  backgroundColor: Colors.black,
+                  iconSize: 5000,
+                  elevation: 150,
+                ),
+                onPressed: () {},
+                icon: Icon(Icons.facebook_rounded),
+              ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: TextField(
@@ -84,6 +94,23 @@ class HomeScreen extends StatelessWidget {
                   textInputAction: TextInputAction.send,
                   obscureText: true,
                 ),
+              ),
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {},
+                icon: Icon(Icons.login_rounded),
+                label: Text('Login'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () {},
+                child: Text('Log into another account'),
               )
             ],
           ),
