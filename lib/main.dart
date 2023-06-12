@@ -42,15 +42,18 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              IconButton(
-                style: IconButton.styleFrom(
-                  foregroundColor: Colors.blue,
-                  backgroundColor: Colors.black,
-                  iconSize: 5000,
-                  elevation: 150,
+              Container(
+                height: 100,
+                width: 100,
+                child: IconButton(
+                  style: IconButton.styleFrom(),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.facebook_rounded,
+                    size: 100,
+                    color: Colors.blue,
+                  ),
                 ),
-                onPressed: () {},
-                icon: Icon(Icons.facebook_rounded),
               ),
               Padding(
                 padding: const EdgeInsets.all(30.0),
