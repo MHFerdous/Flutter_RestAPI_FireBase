@@ -18,66 +18,69 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
+  List<String> students = ['Ferdous', 'Rafi', 'Talha'];
+
+  Map<int, String> universities = {
+    1: 'SUST',
+    2: 'LU',
+    3: 'MU',
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          'Intro to widgets',
-          textAlign: TextAlign.start,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            wordSpacing: 0.5,
-            letterSpacing: 0.5,
-            fontSize: 20,
-            //decoration: TextDecoration.underline,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            'Intro to widgets',
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              wordSpacing: 0.5,
+              letterSpacing: 0.5,
+              fontSize: 20,
+              //decoration: TextDecoration.underline,
+            ),
           ),
-        ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-        ],
-        backgroundColor: Colors.black38,
-        centerTitle: true,
-      ),
-      body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListTile(
-            onTap: () {
-              print('tapped');
-            },
-            title: Text('User Name'),
-            subtitle: Text('Designation'),
-            leading: Icon(Icons.account_circle_rounded),
-            trailing: Icon(Icons.volume_mute_rounded),
-            tileColor: Colors.grey.shade300,
-            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.menu),
           ),
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            spacing: 20,
-            //direction: Axis.vertical,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-            ],
-          )
-        ],
-      )),
-    );
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+          ],
+          backgroundColor: Colors.black38,
+          centerTitle: true,
+        ),
+        /*body: ListView.separated(
+          itemCount: students.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(students[index]),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: 0,
+              color: Colors.red,
+            );
+          },
+        ));*/
+        body: ListView.separated(
+          itemCount: universities.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(universities.values.elementAt(index).toString()),
+              subtitle: Text(universities.keys.elementAt(index).toString()),
+            );
+          },
+          separatorBuilder: (context, index) {
+            return Divider(
+              height: 0,
+              color: Colors.red,
+            );
+          },
+        ));
   }
 }
