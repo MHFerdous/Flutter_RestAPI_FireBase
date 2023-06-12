@@ -29,31 +29,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            'Intro to widgets',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              wordSpacing: 0.5,
-              letterSpacing: 0.5,
-              fontSize: 20,
-              //decoration: TextDecoration.underline,
-            ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Intro to widgets',
+          textAlign: TextAlign.start,
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+            wordSpacing: 0.5,
+            letterSpacing: 0.5,
+            fontSize: 20,
+            //decoration: TextDecoration.underline,
           ),
-          leading: IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
-          actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-          ],
-          backgroundColor: Colors.black38,
-          centerTitle: true,
         ),
-        /*body: ListView.separated(
+        leading: IconButton(
+          onPressed: () {},
+          icon: Icon(Icons.menu),
+        ),
+        actions: [
+          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+        ],
+        backgroundColor: Colors.black38,
+        centerTitle: true,
+      ),
+      /*body: ListView.separated(
           itemCount: students.length,
           itemBuilder: (context, index) {
             return ListTile(
@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
             );
           },
         ));*/
-        body: ListView.separated(
+      /*body: ListView.separated(
           itemCount: universities.length,
           itemBuilder: (context, index) {
             return ListTile(
@@ -81,6 +81,53 @@ class HomeScreen extends StatelessWidget {
               color: Colors.red,
             );
           },
-        ));
+        )*/
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Stack(
+            children: [
+              Container(
+                width: 200,
+                height: 200,
+                color: Colors.yellow,
+                alignment: Alignment.center,
+              ),
+              Positioned(
+                bottom: 20,
+                right: 20,
+                left: 20,
+                top: 20,
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  color: Colors.redAccent,
+                ),
+              ),
+              Positioned(
+                  bottom: 40,
+                  right: 40,
+                  left: 40,
+                  top: 40,
+                  child: Container(
+                    width: 25,
+                    height: 25,
+                    color: Colors.black,
+                  )),
+              Positioned.fill(
+                  child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  'Hello Ferdous',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ))
+            ],
+          )
+        ],
+      ),
+    );
   }
 }
