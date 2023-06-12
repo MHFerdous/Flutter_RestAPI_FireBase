@@ -8,7 +8,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Photo Gallery',
+      debugShowCheckedModeBanner: false,
+      title: 'Photo Grid with ListView',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -17,20 +18,38 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  final List<String> photoUrls = [
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-    'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
-  ];
+class Photo {
+  final String imageUrl;
+  final String title;
+  final String subtitle;
 
-  final List<String> listItems = [
-    'Sample Photo 1',
-    'Sample Photo 2',
-    'Sample Photo 3',
+  Photo({
+    required this.imageUrl,
+    required this.title,
+    required this.subtitle,
+  });
+}
+
+class MyHomePage extends StatelessWidget {
+  final List<Photo> photos = [
+    Photo(
+      imageUrl:
+          'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+      title: 'Sample Photo 1',
+      subtitle: 'Description 1',
+    ),
+    Photo(
+      imageUrl:
+          'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+      title: 'Sample Photo 2',
+      subtitle: 'Description 2',
+    ),
+    Photo(
+      imageUrl:
+          'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load',
+      title: 'Sample Photo 3',
+      subtitle: 'Description 3',
+    ),
   ];
 
   @override
@@ -40,82 +59,99 @@ class MyHomePage extends StatelessWidget {
         title: Text('Photo Gallery'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              margin: EdgeInsets.all(16.0),
-              child: Text(
-                'Welcome to My Photo Gallery!',
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            Text(
+              'Welcome to my photo gallery!',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 16.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  icon: Icon(Icons.search),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
                   hintText: 'Search',
-                  border: OutlineInputBorder(),
-                  contentPadding: EdgeInsets.all(10.0),
+                  border: OutlineInputBorder()),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Expanded(
+              child: GridView.builder(
+                itemCount: 6,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.8,
                 ),
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Image.network(
+                            'https://images.pexels.com/photos/17133050/pexels-photo-17133050.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load'),
+                        Positioned.fill(
+                            child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Text(
+                            'Caption',
+                            style: TextStyle(
+                                color: Colors.white,
+                                backgroundColor: Colors.blueGrey),
+                          ),
+                        ))
+                      ],
+                    ),
+                  );
+                },
               ),
             ),
-            SizedBox(height: 16.0),
-            Wrap(
-              spacing: 8.0,
-              runSpacing: 8.0,
-              alignment: WrapAlignment.center,
-              children: photoUrls.map((url) {
-                return ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Clicked on photo!')),
-                    );
-                  },
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.network(
-                        url,
-                        width: 100.0,
-                        height: 100.0,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 6.0),
-                      Text('Caption'),
-                    ],
-                  ),
-                );
-              }).toList(),
+            SizedBox(
+              height: 170,
+              child: ListView.builder(
+                itemCount: photos.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return ListTile(
+                    onTap: () {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Clicked on photo!'),
+                        backgroundColor: Colors.blue,
+                      ));
+                    },
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(photos[index].imageUrl),
+                    ),
+                    title: Text(photos[index].title),
+                    subtitle: Text(photos[index].subtitle),
+                  );
+                },
+              ),
             ),
-            SizedBox(height: 10.0),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: listItems.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(photoUrls[index]),
-                  ),
-                  title: Text(listItems[index]),
-                  subtitle: Text('Category'),
-                );
-              },
-            ),
-            SizedBox(height: 16.0),
             IconButton(
-              icon: Icon(Icons.upload),
-              onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Photos Uploaded Successfully!')),
-                );
-              },
-            ),
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text('Photos Uploaded Successfully!'),
+                    backgroundColor: Colors.blue,
+                  ));
+                },
+                icon: Icon(
+                  Icons.cloud_upload,
+                  color: Colors.blue,
+                  size: 40,
+                ))
           ],
         ),
       ),
