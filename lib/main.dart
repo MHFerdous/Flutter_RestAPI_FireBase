@@ -40,7 +40,7 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text('Hello Ferdous'),
-          Image.asset("assets/images/R.jpeg", height: 200, width: 200),
+          Image.asset("assets/R.jpeg", height: 200, width: 200),
         ],
       )),
       floatingActionButton: FloatingActionButton(
@@ -49,8 +49,9 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       drawer: Drawer(
-        child: ListView(children: [
-          DrawerHeader(
+        child: ListView(
+          children: [
+            DrawerHeader(
               padding: EdgeInsets.all(0),
               child: UserAccountsDrawerHeader(
                 decoration: BoxDecoration(color: Colors.blueGrey),
@@ -63,38 +64,40 @@ class HomeScreen extends StatelessWidget {
                 currentAccountPicture: Image.network(
                     'https://cdn0.iconfinder.com/data/icons/education-school-science/100/29-512.png'),
                 //currentAccountPictureSize: Size.square(150),
-              )),
-          ListTile(
-            leading: Icon(Icons.person),
-            title: Text('My Profile'),
-            hoverColor: Colors.grey,
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Home'),
-            hoverColor: Colors.grey,
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.call),
-            title: Text('Contact with Manager'),
-            hoverColor: Colors.grey,
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.report_gmailerrorred_outlined),
-            title: Text('Report to Manager'),
-            hoverColor: Colors.grey,
-            onTap: () {},
-          ),
-          ListTile(
-            leading: Icon(Icons.question_mark),
-            title: Text('About'),
-            hoverColor: Colors.grey,
-            onTap: () {},
-          ),
-        ]),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('My Profile'),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.call),
+              title: Text('Contact with Manager'),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.report_gmailerrorred_outlined),
+              title: Text('Report to Manager'),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.question_mark),
+              title: Text('About'),
+              hoverColor: Colors.grey,
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
     );
   }
