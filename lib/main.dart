@@ -103,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                   print('Long Pressed');
                 },
                 child: Image.asset(
-                  'assets/img.png',
+                  'assets/R.jpeg',
                   width: 100,
                 ),
               ),
