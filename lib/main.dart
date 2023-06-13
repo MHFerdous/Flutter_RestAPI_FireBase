@@ -18,14 +18,6 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatelessWidget {
-  List<String> students = ['Ferdous', 'Rafi', 'Talha'];
-
-  Map<int, String> universities = {
-    1: 'SUST',
-    2: 'LU',
-    3: 'MU',
-  };
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,54 +26,10 @@ class HomeScreen extends StatelessWidget {
         title: Text(
           'Intro to widgets',
           textAlign: TextAlign.start,
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            wordSpacing: 0.5,
-            letterSpacing: 0.5,
-            fontSize: 20,
-            //decoration: TextDecoration.underline,
-          ),
         ),
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
-        ],
         backgroundColor: Colors.black38,
         centerTitle: true,
       ),
-      /*body: ListView.separated(
-          itemCount: students.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(students[index]),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              height: 0,
-              color: Colors.red,
-            );
-          },
-        ));*/
-      /*body: ListView.separated(
-          itemCount: universities.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(universities.values.elementAt(index).toString()),
-              subtitle: Text(universities.keys.elementAt(index).toString()),
-            );
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              height: 0,
-              color: Colors.red,
-            );
-          },
-        )*/
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -110,8 +58,8 @@ class HomeScreen extends StatelessWidget {
                   left: 40,
                   top: 40,
                   child: Container(
-                    width: 25,
-                    height: 25,
+                    /*width: 25,
+                    height: 25,*/
                     color: Colors.black,
                   )),
               Positioned.fill(
