@@ -33,6 +33,28 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Text('Hi'),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: Text('press me'
+            ''),
+      ),
     );
+  }
+}
+
+
+
+
+class GoodScreen extends StatefulWidget {
+  const GoodScreen({Key? key}) : super(key: key);
+
+  @override
+  State<GoodScreen> createState() => _GoodScreenState();
+}
+
+class _GoodScreenState extends State<GoodScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
   }
 }
