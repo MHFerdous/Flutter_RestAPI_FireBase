@@ -13,6 +13,10 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Counter App'),
+        centerTitle: true,
+      ),
       body: Center(
         child: Text(
           counter.toString(),
