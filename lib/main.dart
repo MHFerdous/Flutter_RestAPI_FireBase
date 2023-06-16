@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      home: HomeScreen(),
+      home: GoodScreen(),
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
+/*class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -40,10 +40,7 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-
-
+}*/
 
 class GoodScreen extends StatefulWidget {
   const GoodScreen({Key? key}) : super(key: key);
@@ -53,8 +50,52 @@ class GoodScreen extends StatefulWidget {
 }
 
 class _GoodScreenState extends State<GoodScreen> {
+  String welcomeMessege = 'HI';
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant GoodScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My App'),
+      ),
+      body: Center(
+        child: Text(
+          welcomeMessege,
+          style: TextStyle(fontSize: 25),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          welcomeMessege = welcomeMessege == 'HI' ? 'HELLO' : 'HI';
+          print(welcomeMessege);
+          setState(() {});
+        },
+        label: Text('press me'),
+      ),
+    );
+  }
+
+  @override
+  void deactivate() {
+    super.deactivate();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
