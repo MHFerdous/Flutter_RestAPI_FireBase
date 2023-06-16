@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_application/counter_screen.dart';
 
 void main() {
   runApp(
-    MyApp(
+    const MyApp(
       appName: 'Hello App',
     ),
   );
@@ -16,11 +17,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: appName,
-      home: GoodScreen(),
+      home: const CounterScreen(),
     );
   }
 }
 
+/*
 class GoodScreen extends StatefulWidget {
   const GoodScreen({Key? key}) : super(key: key);
 
@@ -78,3 +80,4 @@ class _GoodScreenState extends State<GoodScreen> {
     super.dispose();
   }
 }
+*/
