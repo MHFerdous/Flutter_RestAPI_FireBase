@@ -29,7 +29,7 @@ class GoodScreen extends StatefulWidget {
 }
 
 class _GoodScreenState extends State<GoodScreen> {
-  String welcomeMessege = 'HI';
+  String welcomeMessage = 'HI';
 
   @override
   void initState() {
@@ -53,14 +53,14 @@ class _GoodScreenState extends State<GoodScreen> {
       ),
       body: Center(
         child: Text(
-          welcomeMessege,
+          welcomeMessage,
           style: TextStyle(fontSize: 25),
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          welcomeMessege = welcomeMessege == 'HI' ? 'HELLO' : 'HI';
-          print(welcomeMessege);
+          welcomeMessage = welcomeMessage == 'HI' ? 'HELLO' : 'HI';
+          print(welcomeMessage);
           setState(() {});
         },
         label: Text('press me'),
