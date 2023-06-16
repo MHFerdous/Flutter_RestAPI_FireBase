@@ -21,27 +21,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('My App'),
-      ),
-      body: Center(
-        child: Text('Hi'),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        label: Text('press me'
-            ''),
-      ),
-    );
-  }
-}*/
-
 class GoodScreen extends StatefulWidget {
   const GoodScreen({Key? key}) : super(key: key);
 
