@@ -29,38 +29,44 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Product List'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Scrollbar(
-              child: ListView.separated(
-                  itemCount: product.length,
-                  /*primary: false,
-                shrinkWrap: true,*/
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                        title: Text(product.values.elementAt(index).toString()),
-                        subtitle:
-                            Text(product.keys.elementAt(index).toString()),
-                        trailing: ElevatedButton(
-                          onPressed: () {
-                            return;
-                          },
-                          child: const Text('Buy Now'),
-                        ));
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Divider(
-                      height: 0,
-                    );
-                  }),
+      body: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: ListView.separated(
+              itemCount: product.length,
+              primary: false,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(product.values.elementAt(index).toString()),
+                  subtitle: Text(product.keys.elementAt(index).toString()),
+                  trailing: Container(
+                    child: Column(
+                      children: [
+                        const Text('Counter'),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(elevation: 10),
+                          onPressed: () {},
+                          child: const Text('Buy now'),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
