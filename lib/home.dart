@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Expanded(
                       child: Container(
-                    color: Colors.blueAccent,
+                    color: Colors.lightGreen,
                   ))
                 ],
               ),
@@ -86,7 +86,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Expanded(
                       child: Container(
-                        color: Colors.blueAccent,
+                        color: Colors.lightGreen,
                       ),
                     )
                   ],
@@ -116,13 +116,64 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Expanded(
                       child: Container(
-                        color: Colors.blueAccent,
+                        color: Colors.lightGreen,
                       ),
                     ),
                   ],
                 ),
               ),
             ),
+          ),
+        ],
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton.extended(
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                barrierColor: Colors.grey.shade700,
+                builder: (context) {
+                  return AlertDialog(
+                    shadowColor: Colors.grey,
+                    titlePadding: EdgeInsets.all(10),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Message'),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                    content: const Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Hey Welcome'),
+                      ],
+                    ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Thanks'),
+                      ),
+                    ],
+                    contentPadding: const EdgeInsets.all(25),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  );
+                },
+              );
+            },
+            label: const Text('Dialog'),
           ),
         ],
       ),
