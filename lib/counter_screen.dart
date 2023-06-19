@@ -65,7 +65,7 @@ class _CounterAppState extends State<CounterApp> {
               style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: _decrementCounter,
