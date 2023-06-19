@@ -77,6 +77,3 @@ class _GoodScreenState extends State<GoodScreen> {
     super.dispose();
   }
 }
-
-
-
