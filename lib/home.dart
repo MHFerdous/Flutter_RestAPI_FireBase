@@ -35,35 +35,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                    color: Colors.lightGreen,
-                  ))
+                    child: Container(
+                      color: Colors.lightGreen,
+                    ),
+                  ),
                 ],
               ),
             ),
           ),
-          /*Container(
-            width: 100,
-            height: 100,
-            color: Colors.red,
-          ),
-          Flexible(
-            //fit: FlexFit.tight,
-            child: Container(
-              width: 100,
-              //height: 100,
-              color: Colors.black,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              width: 100,
-              //height: 100,
-              color: Colors.blue,
-            ),
-          ),*/
-
           Flexible(
             fit: FlexFit.tight,
             child: Container(
@@ -129,56 +108,50 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          /*FloatingActionButton.extended(
+          FloatingActionButton.extended(
             onPressed: () {
-              showDialog(
+              showModalBottomSheet(
                 context: context,
-                barrierDismissible: false,
-                barrierColor: Colors.grey.shade700,
+                isScrollControlled: true,
+                useSafeArea: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(16),
+                    topLeft: Radius.circular(16),
+                  ),
+                ),
                 builder: (context) {
-                  return AlertDialog(
-                    shadowColor: Colors.grey,
-                    titlePadding: EdgeInsets.all(10),
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text('Message'),
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.close),
+                  return Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Hello',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon: const Icon(Icons.close),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    content: const Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Hey Welcome'),
-                      ],
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Thanks'),
                       ),
+                      const Divider(
+                        color: Colors.black,
+                      )
                     ],
-                    contentPadding: const EdgeInsets.all(25),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
                   );
                 },
               );
             },
-            label: const Text('Dialog'),
-          ),*/
-          FloatingActionButton.extended(
-            onPressed: () {
-
-    },
             label: const Text('Bottom Sheet'),
           ),
         ],
