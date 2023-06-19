@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          FloatingActionButton.extended(
+          /*FloatingActionButton.extended(
             onPressed: () {
               showDialog(
                 context: context,
@@ -174,6 +174,12 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             label: const Text('Dialog'),
+          ),*/
+          FloatingActionButton.extended(
+            onPressed: () {
+
+    },
+            label: const Text('Bottom Sheet'),
           ),
         ],
       ),
