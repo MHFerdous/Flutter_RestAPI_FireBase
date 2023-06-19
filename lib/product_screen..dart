@@ -8,22 +8,24 @@ class ProductScreen extends StatefulWidget {
 }
 
 class _ProductScreenState extends State<ProductScreen> {
-  Map<String, String> product = {
-    '\$10.00': 'Product 1',
-    '\$15.00': 'Product 2',
-    '\$20.00': 'Product 3',
-    '\$25.00': 'Product 4',
-    '\$30.00': 'Product 5',
-    '\$35.00': 'Product 6',
-    '\$40.00': 'Product 7',
-    '\$45.00': 'Product 8',
-    '\$50.00': 'Product 9',
-    '\$55.00': 'Product 10',
-    '\$60.00': 'Product 10',
-    '\$65.00': 'Product 11',
-    '\$70.00': 'Product 12',
-    '\$75.00': 'Product 13',
-    '\$80.00': 'Product 14',
+  int counter = 0;
+
+  Map<String, Map<String, int>> product = {
+    '\$10.00': {'Product 1': 0},
+    '\$15.00': {'Product 1': 0},
+    '\$20.00': {'Product 1': 0},
+    '\$25.00': {'Product 1': 0},
+    '\$30.00': {'Product 1': 0},
+    '\$35.00': {'Product 1': 0},
+    '\$40.00': {'Product 1': 0},
+    '\$45.00': {'Product 1': 0},
+    '\$50.00': {'Product 1': 0},
+    '\$55.00': {'Product 1': 0},
+    '\$60.00': {'Product 1': 0},
+    '\$65.00': {'Product 1': 0},
+    '\$70.00': {'Product 1': 0},
+    '\$75.00': {'Product 1': 0},
+    '\$80.00': {'Product 1': 0},
   };
 
   @override
@@ -47,13 +49,16 @@ class _ProductScreenState extends State<ProductScreen> {
                 return ListTile(
                   title: Text(product.values.elementAt(index).toString()),
                   subtitle: Text(product.keys.elementAt(index).toString()),
-                  trailing: Container(
+                  trailing: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const Text('Counter'),
+                        Text('counter $counter'),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(elevation: 10),
-                          onPressed: () {},
+                          onPressed: () {
+                            product[counter++];
+                            setState(() {});
+                          },
                           child: const Text('Buy now'),
                         ),
                       ],
@@ -71,3 +76,5 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 }
+
+
