@@ -1,80 +1,102 @@
 import 'package:flutter/material.dart';
+import 'cart_screen.dart';
 
-class ProductScreen extends StatefulWidget {
-  const ProductScreen({Key? key}) : super(key: key);
+class Product {
+  final String name;
+  final double price;
+  int count;
 
-  @override
-  State<ProductScreen> createState() => _ProductScreenState();
+  Product({required this.name, required this.price, this.count = 0});
 }
 
-class _ProductScreenState extends State<ProductScreen> {
-  int counter = 0;
+class ProductList extends StatefulWidget {
+  const ProductList({super.key});
 
-  Map<String, Map<String, int>> product = {
-    '\$10.00': {'Product 1': 0},
-    '\$15.00': {'Product 1': 0},
-    '\$20.00': {'Product 1': 0},
-    '\$25.00': {'Product 1': 0},
-    '\$30.00': {'Product 1': 0},
-    '\$35.00': {'Product 1': 0},
-    '\$40.00': {'Product 1': 0},
-    '\$45.00': {'Product 1': 0},
-    '\$50.00': {'Product 1': 0},
-    '\$55.00': {'Product 1': 0},
-    '\$60.00': {'Product 1': 0},
-    '\$65.00': {'Product 1': 0},
-    '\$70.00': {'Product 1': 0},
-    '\$75.00': {'Product 1': 0},
-    '\$80.00': {'Product 1': 0},
-  };
+  @override
+  _ProductListState createState() => _ProductListState();
+}
+
+class _ProductListState extends State<ProductList> {
+  List<Product> products = [
+    Product(name: 'Product 1', price: 10.0),
+    Product(name: 'Product 2', price: 15.0),
+    Product(name: 'Product 3', price: 20.0),
+    Product(name: 'Product 4', price: 25.0),
+    Product(name: 'Product 5', price: 30.0),
+    Product(name: 'Product 6', price: 35.0),
+    Product(name: 'Product 7', price: 40.0),
+    Product(name: 'Product 8', price: 45.0),
+    Product(name: 'Product 9', price: 50.0),
+    Product(name: 'Product 10', price: 55.0),
+    Product(name: 'Product 11', price: 60.0),
+    Product(name: 'Product 12', price: 65.0),
+    Product(name: 'Product 13', price: 70.0),
+    Product(name: 'Product 14', price: 75.0),
+    Product(name: 'Product 15', price: 80.0),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text('Product List'),
         centerTitle: true,
       ),
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Expanded(
-            child: ListView.separated(
-              itemCount: product.length,
-              primary: false,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(product.values.elementAt(index).toString()),
-                  subtitle: Text(product.keys.elementAt(index).toString()),
-                  trailing: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Text('counter $counter'),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(elevation: 10),
-                          onPressed: () {
-                            product[counter++];
-                            setState(() {});
-                          },
-                          child: const Text('Buy now'),
-                        ),
-                      ],
-                    ),
+      body: ListView.builder(
+        itemCount: products.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(products[index].name),
+            subtitle: Text('Price: \$${products[index].price.toString()}'),
+            trailing: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Counter: ${products[index].count}'),
+                  const SizedBox(width: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      products[index].count++;
+                      if (products[index].count == 5) {
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: const Text('Congratulations!'),
+                            content: Text(
+                                'You\'ve bought 5 ${products[index].name}!'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('OK'),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      setState(
+                        () {},
+                      );
+                    },
+                    child: const Text('Buy Now'),
                   ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
+                ],
+              ),
             ),
-          ),
-        ],
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CartPage(products: products)),
+          );
+        },
+        child: const Icon(Icons.shopping_cart),
       ),
     );
   }
 }
-
-
