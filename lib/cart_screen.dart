@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_application/product_screen..dart';
 
 class CartPage extends StatelessWidget {
   final List<Product> products;
 
-  CartPage({required this.products});
+  const CartPage({super.key, required this.products});
 
   int getTotalQuantity() {
     int total = 0;
