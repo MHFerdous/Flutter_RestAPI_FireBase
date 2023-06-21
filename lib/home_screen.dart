@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            color: Colors.black,
+            color: Colors.blueGrey,
             onPressed: () {
               todos.clear();
               if (mounted) {
@@ -59,14 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    color: Colors.deepOrange,
+                    color: Colors.blueGrey,
                     onPressed: () {
                       showAddNewTodoModelSheet();
                     },
                     icon: const Icon(Icons.change_circle),
                   ),
                   IconButton(
-                    color: Colors.deepOrange,
+                    color: Colors.blueGrey,
                     onPressed: () {
                       todos.removeAt(index);
                       if (mounted) {
