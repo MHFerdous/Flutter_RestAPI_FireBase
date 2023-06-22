@@ -12,6 +12,17 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _descriptionTEController =
       TextEditingController();
 
+  ThemeData _currentTheme = ThemeData.light();
+
+  void _changeTheme() {
+    if (_currentTheme == ThemeData.light()) {
+      _currentTheme = ThemeData.dark();
+    } else {
+      _currentTheme = ThemeData.light();
+    }
+    setState(() {});
+  }
+
   List<Todo> todos = [];
 
   @override
@@ -26,13 +37,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            _changeTheme();
+          },
+          icon: const Icon(Icons.dark_mode),
+        ),
         actions: [
-          IconButton(
-            onPressed: () {
-
-            },
-            icon: const Icon(Icons.dark_mode),
-          ),
           IconButton(
             color: Colors.blueGrey.shade900,
             onPressed: () {
