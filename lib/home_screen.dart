@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.grey.shade700,
         title: const Text(
           'TODO App',
           style: TextStyle(
@@ -28,7 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         actions: [
           IconButton(
-            color: Colors.blueGrey,
+            onPressed: () {
+
+            },
+            icon: const Icon(Icons.dark_mode),
+          ),
+          IconButton(
+            color: Colors.blueGrey.shade900,
             onPressed: () {
               todos.clear();
               if (mounted) {
@@ -61,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   IconButton(
                     color: Colors.blueGrey,
                     onPressed: () {
-                      showAddNewTodoModelSheet();
+                      editTodoModelSheet();
                     },
                     icon: const Icon(Icons.change_circle),
                   ),
@@ -99,10 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void showAddNewTodoModelSheet() {
     showModalBottomSheet(
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(15),
-        topRight: Radius.circular(15),
-      )),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+      ),
       context: context,
       builder: (context) {
         return Padding(
@@ -111,6 +118,106 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               const Text(
                 'Add new todo:',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+              const Divider(
+                color: Colors.deepOrange,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _titleTEController,
+                  decoration: const InputDecoration(
+                    hintText: 'Title',
+                    label: Text(
+                      'Add title:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.next,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: _descriptionTEController,
+                  decoration: const InputDecoration(
+                    hintText: 'Description',
+                    label: Text(
+                      'Add description:',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.black),
+                    ),
+                  ),
+                  textInputAction: TextInputAction.done,
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_titleTEController.text.trim().isNotEmpty &&
+                        _descriptionTEController.text.trim().isNotEmpty) {
+                      todos.add(
+                        Todo(_titleTEController.text.trim(),
+                            _descriptionTEController.text.trim(), false),
+                      );
+                      if (mounted) {
+                        setState(() {});
+                      }
+                      _titleTEController.clear();
+                      _descriptionTEController.clear();
+                      Navigator.pop(context);
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepOrange,
+                  ),
+                  child: const Text(
+                    'Add',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  void editTodoModelSheet() {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15),
+          topRight: Radius.circular(15),
+        ),
+      ),
+      context: context,
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const Text(
+                'Edit todo:',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
@@ -181,7 +288,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     backgroundColor: Colors.deepOrange,
                   ),
                   child: const Text(
-                    'Add',
+                    'Update',
                     style: TextStyle(
                       fontSize: 20,
                     ),

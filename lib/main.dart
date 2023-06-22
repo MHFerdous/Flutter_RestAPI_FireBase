@@ -10,9 +10,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'TODO',
-      home: HomeScreen(),
+      home: const HomeScreen(),
+      themeMode: ThemeMode.dark,
+      theme: ThemeData(
+          brightness: Brightness.light,
+          primarySwatch: Colors.red,
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.blueGrey,
+          )),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.red,
+        // it will not work now as the color of the buttons are already applied from button widgets
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.green,
+        ),
+      ),
     );
   }
 }
