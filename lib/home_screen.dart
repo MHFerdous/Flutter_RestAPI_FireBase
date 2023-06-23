@@ -25,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Todo> todos = [];
 
+  GlobalKey<FormState> todoForm = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,88 +129,102 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context) {
         return Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const Text(
-                'Add new todo:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
+          child: Form(
+            key: todoForm,
+            child: Column(
+              children: [
+                const Text(
+                  'Add new todo:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
-              ),
-              const Divider(
-                color: Colors.deepOrange,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _titleTEController,
-                  decoration: const InputDecoration(
-                    hintText: 'Title',
-                    label: Text(
-                      'Add title:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        //borderSide: BorderSide(color: Colors.black),
+                const Divider(
+                  color: Colors.deepOrange,
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _titleTEController,
+                    decoration: const InputDecoration(
+                      hintText: 'Title',
+                      label: Text(
+                        'Add title:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          //borderSide: BorderSide(color: Colors.black),
+                          ),
+                    ),
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please add title';
+                      }
+                      return null;
+                    },
+                    textInputAction: TextInputAction.next,
                   ),
-                  textInputAction: TextInputAction.next,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _descriptionTEController,
-                  decoration: const InputDecoration(
-                    hintText: 'Description',
-                    label: Text(
-                      'Add description:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: _descriptionTEController,
+                    decoration: const InputDecoration(
+                      hintText: 'Description',
+                      label: Text(
+                        'Add description:',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black),
                       ),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
-                  ),
-                  textInputAction: TextInputAction.done,
-                ),
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (_titleTEController.text.trim().isNotEmpty &&
-                        _descriptionTEController.text.trim().isNotEmpty) {
-                      todos.add(
-                        Todo(_titleTEController.text.trim(),
-                            _descriptionTEController.text.trim(), false),
-                      );
-                      if (mounted) {
-                        setState(() {});
+                    validator: (String? value) {
+                      if (value?.trim().isEmpty ?? true) {
+                        return 'Please add description';
                       }
-                      _titleTEController.clear();
-                      _descriptionTEController.clear();
-                      Navigator.pop(context);
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepOrange,
+                      return null;
+                    },
+                    textInputAction: TextInputAction.done,
                   ),
-                  child: const Text(
-                    'Add',
-                    style: TextStyle(
-                      fontSize: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (todoForm.currentState!.validate()) {
+                        todos.add(
+                          Todo(_titleTEController.text.trim(),
+                              _descriptionTEController.text.trim(), false),
+                        );
+                        if (mounted) {
+                          setState(() {});
+                        }
+                        _titleTEController.clear();
+                        _descriptionTEController.clear();
+                        Navigator.pop(context);
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepOrange,
+                    ),
+                    child: const Text(
+                      'Add',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
