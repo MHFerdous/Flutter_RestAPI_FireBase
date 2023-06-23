@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'TODO',
       home: const HomeScreen(),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
           brightness: Brightness.light,
           primarySwatch: Colors.red,
