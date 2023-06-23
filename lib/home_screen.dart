@@ -10,8 +10,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _nameTEController = TextEditingController();
   final TextEditingController _emailTEController = TextEditingController();
-
-  TextEditingController _paasswordTEController = TextEditingController();
+  final TextEditingController _passwordTEController = TextEditingController();
 
   GlobalKey<FormState> regForm = GlobalKey<FormState>();
 
@@ -47,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  // validator: (String ? value),
                 ),
               ),
               Padding(
@@ -68,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
-                  controller: _paasswordTEController,
+                  controller: _passwordTEController,
                   decoration: const InputDecoration(
                     hintText: 'Password',
                     label: Text(
