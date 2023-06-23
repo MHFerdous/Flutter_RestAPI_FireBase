@@ -66,9 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 setState(() {});
               }
             },
-            leading: todos[index].isDone
-                ? const Icon(Icons.done)
-                : const Icon(Icons.pending_actions_outlined),
+            leading: Visibility(
+              visible: todos[index].isDone,
+              replacement: const Icon(Icons.pending_actions_outlined),
+              child: const Icon(Icons.done),
+            ),
             title: Text(todos[index].title),
             subtitle: Text(todos[index].description),
             trailing: SingleChildScrollView(
@@ -151,8 +153,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.black),
-                    ),
+                        //borderSide: BorderSide(color: Colors.black),
+                        ),
                   ),
                   textInputAction: TextInputAction.next,
                 ),
