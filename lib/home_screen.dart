@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/second_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -21,9 +22,6 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.grey.shade700,
         title: const Text(
           'Registration Form',
-          style: TextStyle(
-            color: Colors.black,
-          ),
         ),
         centerTitle: true,
       ),
@@ -46,7 +44,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
-                  // validator: (String ? value),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -63,6 +66,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                   ),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Please enter your email';
+                    }
+                    return null;
+                  },
                 ),
               ),
               Padding(
@@ -78,6 +87,33 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                  validator: (String? value) {
+                    if (value?.trim().isEmpty ?? true) {
+                      return 'Please enter your password';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (regForm.currentState!.validate()) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SecondScreen()),
+                        );
+                      }
+                      if (mounted) {
+                        setState(() {});
+                      }
+                    },
+                    child: const Text('Sign in'),
                   ),
                 ),
               ),
