@@ -78,8 +78,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       return 'Please enter your email';
                     }
                     if (!RegExp(
-                            r'[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$)
-                        .hasMatch(value!))) {
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value!)) {
                       return 'Enter a valid email';
                     }
                     return null;
