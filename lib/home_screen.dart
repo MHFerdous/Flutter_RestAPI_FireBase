@@ -18,6 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         backgroundColor: Colors.grey.shade700,
         title: const Text(
@@ -34,16 +35,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
                   controller: _nameTEController,
+                  keyboardType: TextInputType.name,
                   decoration: const InputDecoration(
                     hintText: 'Name',
                     label: Text(
                       'Input your name',
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(),
                   ),
+                  textInputAction: TextInputAction.next,
                   validator: (String? value) {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Please enter your name';
@@ -56,19 +60,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.all(16.0),
                 child: TextFormField(
                   controller: _emailTEController,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: const InputDecoration(
                     hintText: 'Email',
                     label: Text(
                       'Input your email',
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(),
                   ),
+                  textInputAction: TextInputAction.next,
                   validator: (String? value) {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Please enter your email';
+                    }
+                    if (!RegExp(
+                            r'[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$)
+                        .hasMatch(value!))) {
+                      return 'Enter a valid email';
                     }
                     return null;
                   },
@@ -84,13 +96,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       'Input your password',
                       style: TextStyle(
                         fontSize: 18,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
+                    border: OutlineInputBorder(),
+                    focusedBorder: OutlineInputBorder(),
                   ),
+                  obscureText: true,
                   validator: (String? value) {
                     if (value?.trim().isEmpty ?? true) {
                       return 'Please enter your password';
+                    }
+                    if (value!.length < 6) {
+                      return 'Password must be at least 6 letters';
                     }
                     return null;
                   },
@@ -108,9 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           MaterialPageRoute(
                               builder: (context) => const SecondScreen()),
                         );
-                      }
-                      if (mounted) {
-                        setState(() {});
+                        _nameTEController.clear();
+                        _emailTEController.clear();
+                        _passwordTEController.clear();
                       }
                     },
                     child: const Text('Sign in'),
