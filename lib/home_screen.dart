@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
-            _changeTheme();
+
           },
           icon: const Icon(Icons.dark_mode),
         ),

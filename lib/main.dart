@@ -12,15 +12,48 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+bool iconBool = false;
+IconData iconLight = Icons.wb_sunny;
+IconData iconDark = Icons.nights_stay;
+
+ThemeData lightTheme = ThemeData(
+  brightness: Brightness.light,
+  primarySwatch: Colors.red,
+);
+
+ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  primarySwatch: Colors.red,
+);
+
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'TODO',
-      home: const HomeScreen(),
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.grey.shade700,
+          title: const Text(
+            'TODO App',
+            style: TextStyle(
+              color: Colors.black,
+            ),
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              setState(() {
+                iconBool = !iconBool;
+              });
+            },
+            icon: const Icon(Icons.dark_mode),
+          ),
+        ),
+      ),
+      theme: iconBool ? darkTheme : lightTheme,
       themeMode: ThemeMode.dark,
-
-      theme: ThemeData(
+      /*theme: ThemeData(
           brightness: Brightness.light,
           primarySwatch: Colors.red,
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -33,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.green,
         ),
-      ),
+      ),*/
     );
   }
 }
