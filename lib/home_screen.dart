@@ -123,7 +123,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const SecondScreen()),
+                            builder: (context) => const SecondScreen(),
+                          ),
                         );
                         _nameTEController.clear();
                         _emailTEController.clear();
