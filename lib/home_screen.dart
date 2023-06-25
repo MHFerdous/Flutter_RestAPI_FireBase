@@ -8,7 +8,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<task> tasks = [];
+  final TextEditingController _titleTEController = TextEditingController();
+  final TextEditingController _descriptionTEController =
+      TextEditingController();
+  final TextEditingController _dateTEController = TextEditingController();
+
+  List<Task> tasks = [];
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,18 @@ class _HomeScreenState extends State<HomeScreen> {
         itemCount: tasks.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onLongPress: () {},
+            onLongPress: () {
+              showModalBottomSheet(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(15),
+                  )),
+                  context: context,
+                  builder: (context) {});
+            },
+            title: Text(tasks[index].title),
+            subtitle: Text(tasks[index].description),
           );
         },
         separatorBuilder: (context, index) {
@@ -35,32 +51,35 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context) {
               return AlertDialog(
                 title: const Text('Add Task'),
-                content: const Column(
+                content: Column(
                   children: [
                     TextField(
-                      decoration: InputDecoration(
+                      controller: _titleTEController,
+                      decoration: const InputDecoration(
                         label: Text('title:'),
                         focusedBorder: OutlineInputBorder(),
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
+                      controller: _descriptionTEController,
                       keyboardType: TextInputType.multiline,
                       maxLines: 4,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         label: Text('Description:'),
                         focusedBorder: OutlineInputBorder(),
                         border: OutlineInputBorder(),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextField(
-                      decoration: InputDecoration(
+                      controller: _dateTEController,
+                      decoration: const InputDecoration(
                         label: Text('Days required:'),
                         focusedBorder: OutlineInputBorder(),
                         border: OutlineInputBorder(),
@@ -70,7 +89,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 actions: [
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      tasks.add(
+                        Task(
+                            _titleTEController.text.trim(),
+                            _descriptionTEController.text.trim(),
+                            _dateTEController.text.trim()),
+                      );
+                      if (mounted) {
+                        setState(() {});
+                      }
+                      _titleTEController.clear();
+                      _descriptionTEController.clear();
+                      _dateTEController.clear();
+                      Navigator.pop(context);
+                    },
                     child: const Text('save'),
                   )
                 ],
@@ -78,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
-
               );
             },
           );
@@ -89,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class task {
+class Task {
   String title, description;
-  int date;
-  task(this.title, this.description, this.date);
+  String date;
+  Task(this.title, this.description, this.date);
 }
