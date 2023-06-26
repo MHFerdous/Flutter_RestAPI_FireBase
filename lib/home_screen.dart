@@ -28,13 +28,53 @@ class _HomeScreenState extends State<HomeScreen> {
           return ListTile(
             onLongPress: () {
               showModalBottomSheet(
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
                     topRight: Radius.circular(15),
                     topLeft: Radius.circular(15),
-                  )),
-                  context: context,
-                  builder: (context) {});
+                  ),
+                ),
+                context: context,
+                builder: (context) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Text(
+                          'Task Details',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                      ListTile(
+                        title: Text('Title: ${tasks[index].title}'),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Description: ${tasks[index].description}',
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text('Date: ${tasks[index].date}'),
+                          ],
+                        ),
+                        trailing: ElevatedButton(
+                          onPressed: () {
+                            tasks.removeAt(index);
+                            Navigator.pop(context);
+                            if (mounted) {
+                              setState(() {});
+                            }
+                          },
+                          child: const Text('Delete'),
+                        ),
+                      )
+                    ],
+                  );
+                },
+              );
             },
             title: Text(tasks[index].title),
             subtitle: Text(tasks[index].description),
