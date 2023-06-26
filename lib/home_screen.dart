@@ -54,21 +54,30 @@ class _HomeScreenState extends State<HomeScreen> {
                           children: [
                             Text(
                               'Description: ${tasks[index].description}',
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
                             ),
-                            Text('Date: ${tasks[index].date}'),
+                            Text(
+                              'Date: ${tasks[index].date}',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                tasks.removeAt(index);
+                                Navigator.pop(context);
+                                if (mounted) {
+                                  setState(() {});
+                                }
+                              },
+                              child: const Text('Delete'),
+                            )
                           ],
-                        ),
-                        trailing: ElevatedButton(
-                          onPressed: () {
-                            tasks.removeAt(index);
-                            Navigator.pop(context);
-                            if (mounted) {
-                              setState(() {});
-                            }
-                          },
-                          child: const Text('Delete'),
                         ),
                       )
                     ],
@@ -92,6 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return AlertDialog(
                 title: const Text('Add Task'),
                 content: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
                       controller: _titleTEController,
@@ -144,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       _dateTEController.clear();
                       Navigator.pop(context);
                     },
-                    child: const Text('save'),
+                    child: const Text('Save'),
                   )
                 ],
                 contentPadding: const EdgeInsets.all(25),
