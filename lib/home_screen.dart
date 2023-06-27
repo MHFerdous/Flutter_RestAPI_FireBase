@@ -13,6 +13,8 @@ class _HomeScreenState extends State<HomeScreen> {
       TextEditingController();
   final TextEditingController _dateTEController = TextEditingController();
 
+  final scaffoldState = GlobalKey<ScaffoldState>();
+
   List<Task> tasks = [];
 
   @override
@@ -27,63 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return ListTile(
             onLongPress: () {
-              showModalBottomSheet(
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(15),
-                    topLeft: Radius.circular(15),
-                  ),
-                ),
-                context: context,
-                builder: (context) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(16.0),
-                        child: Text(
-                          'Task Details',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                      ListTile(
-                        title: Text('Title: ${tasks[index].title}'),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Description: ${tasks[index].description}',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 17),
-                            ),
-                            Text(
-                              'Date: ${tasks[index].date}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                tasks.removeAt(index);
-                                Navigator.pop(context);
-                                if (mounted) {
-                                  setState(() {});
-                                }
-                              },
-                              child: const Text('Delete'),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  );
-                },
-              );
+
             },
             title: Text(tasks[index].title),
             subtitle: Text(tasks[index].description),
