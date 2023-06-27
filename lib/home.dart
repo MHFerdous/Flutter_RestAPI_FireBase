@@ -8,153 +8,61 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final scaffoldState = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldState,
       appBar: AppBar(
         title: const Text('Home'),
       ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.black,
-            height: 100,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      color: Colors.indigo,
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: Colors.white,
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      color: Colors.lightGreen,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Flexible(
-            fit: FlexFit.tight,
-            child: Container(
-              color: Colors.cyanAccent,
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        color: Colors.indigo,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: Colors.lightGreen,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              color: Colors.pinkAccent,
-              height: 100,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        color: Colors.indigo,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        color: Colors.lightGreen,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton.extended(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                useSafeArea: true,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(16),
-                    topLeft: Radius.circular(16),
-                  ),
-                ),
-                builder: (context) {
-                  return Column(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          scaffoldState.currentState?.showBottomSheet<void>(
+            (context) => const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              'Hello',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(Icons.close),
-                            ),
-                          ],
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Divider(
-                        color: Colors.black,
-                      )
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Hello',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
-                  );
-                },
-              );
-            },
-            label: const Text('Bottom Sheet'),
-          ),
-        ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+        label: const Text('Bottom Sheet'),
       ),
     );
   }
