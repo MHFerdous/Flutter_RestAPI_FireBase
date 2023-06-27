@@ -20,6 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade300,
+      key: scaffoldState,
       appBar: AppBar(
         title: const Text('Task Management'),
         centerTitle: true,
@@ -29,7 +31,51 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (context, index) {
           return ListTile(
             onLongPress: () {
+              scaffoldState.currentState?.showBottomSheet<void>(
+                (context) => Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Task Details',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        'Title: ${tasks[index].title}',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'Description: ${tasks[index].description}',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'Date Required: ${tasks[index].date}',
+                        style: const TextStyle(fontSize: 15),
+                      ),
+                      const SizedBox(height: 15),
+                      ElevatedButton(
+                        onPressed: () {
+                          tasks.removeAt(index);
 
+                          Navigator.pop(context);
+                          if (mounted) {
+                            setState(() {});
+                          }
+                        },
+                        child: const Text('Delete'),
+                      ),
+                    ],
+                  ),
+                ),
+              );
             },
             title: Text(tasks[index].title),
             subtitle: Text(tasks[index].description),
