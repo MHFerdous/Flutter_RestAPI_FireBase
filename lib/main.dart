@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'home_screen.dart';
 
-main(){
+main() {
   runApp(const MyApp());
 }
 
