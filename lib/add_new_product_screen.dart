@@ -23,10 +23,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Product Name',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -35,10 +31,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Product Code',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -47,10 +39,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Product Price',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -59,10 +47,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Quantity',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -71,10 +55,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Total Price',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
@@ -83,10 +63,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
               TextFormField(
                 decoration: const InputDecoration(
                   hintText: 'Image',
-                  focusedBorder: OutlineInputBorder(),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.teal),
-                  ),
                 ),
               ),
               const SizedBox(
