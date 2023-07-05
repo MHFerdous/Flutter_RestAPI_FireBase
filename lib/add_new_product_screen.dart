@@ -15,39 +15,92 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         title: const Text('Add Product'),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Product Name'),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Product Code'),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Product Price'),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Quantity'),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Total Price'),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(hintText: 'Image'),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Add'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Product Name',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Product Code',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Product Price',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Quantity',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Total Price',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  hintText: 'Image',
+                  focusedBorder: OutlineInputBorder(),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.teal),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('Add'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

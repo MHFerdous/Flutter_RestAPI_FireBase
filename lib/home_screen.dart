@@ -30,9 +30,51 @@ class _HomeScreenState extends State<HomeScreen> {
       body: ListView.separated(
         itemCount: 10,
         itemBuilder: (context, index) {
-          return const ListTile(
-            title: Text('Product Name'),
-            subtitle: Column(
+          return ListTile(
+            onLongPress: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    titlePadding: const EdgeInsets.only(left: 16, top: 8),
+                    contentPadding:
+                        const EdgeInsets.only(left: 8, right: 8, bottom: 8),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Choose an action'),
+                        IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: const Icon(Icons.close),
+                        ),
+                      ],
+                    ),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ListTile(
+                          onTap: () {},
+                          leading: const Icon(Icons.edit),
+                          title: const Text('Edit'),
+                        ),
+                        const Divider(
+                          height: 0,
+                        ),
+                        ListTile(
+                          onTap: () {},
+                          leading: const Icon(Icons.delete),
+                          title: const Text('Delete'),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+            title: const Text('Product Name'),
+            subtitle: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Product Code'),
@@ -40,8 +82,18 @@ class _HomeScreenState extends State<HomeScreen> {
                 Text('Units Available'),
               ],
             ),
-            leading: Icon(Icons.image),
-            trailing: Text('Unit Price'),
+            leading: Image.network(
+              'https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/asus-vx7-lamborghini-cosmin-constantin-sava.jpg',
+              width: 50,
+              height: 50,
+              errorBuilder: (_, __, ___) {
+                return const Icon(
+                  Icons.image,
+                  size: 32,
+                );
+              },
+            ),
+            trailing: const Text('Unit Price'),
           );
         },
         separatorBuilder: (BuildContext context, int index) {
