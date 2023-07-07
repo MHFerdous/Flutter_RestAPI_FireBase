@@ -33,16 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
       decodedResponse['data'].forEach(
         (e) {
           products.add(
-            Product(
-              e['_id'],
-              e['ProductName'],
-              e['ProductCode'],
-              e['Img'],
-              e['UnitPrice'],
-              e['Qty'],
-              e['TotalPrice'],
-              e['CreatedDate'],
-            ),
+            Product(e['_id'], e['ProductName'], e['ProductCode'], e['Img'],
+                e['UnitPrice'], e['TotalPrice'], e['CreatedDate'], e['Qty']),
           );
         },
       );
@@ -124,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             leading: Image.network(
-             products[index].image,
+              products[index].image,
               width: 50,
               height: 50,
               errorBuilder: (_, __, ___) {
