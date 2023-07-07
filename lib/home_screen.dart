@@ -1,5 +1,8 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:mobile_application/add_new_product_screen.dart';
+import 'package:http/http.dart';
+import 'package:mobile_application/product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -9,6 +12,44 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Product> products = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getProducts();
+  }
+
+  void getProducts() async {
+    Response response = await get(
+      Uri.parse('https://crud.teamrabbil.com/api/v1/ReadProduct'),
+    );
+    print(response.statusCode);
+    print(response.body);
+    final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
+    //print(decodedResponse['data'].length);
+
+    if (response.statusCode == 200 && decodedResponse['status'] == 'success') {
+      decodedResponse['data'].forEach(
+        (e) {
+          products.add(
+            Product(
+              e['_id'],
+              e['ProductName'],
+              e['ProductCode'],
+              e['Img'],
+              e['UnitPrice'],
+              e['Qty'],
+              e['TotalPrice'],
+              e['CreatedDate'],
+            ),
+          );
+        },
+      );
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: const Icon(Icons.add),
       ),
       body: ListView.separated(
-        itemCount: 10,
+        itemCount: products.length,
         itemBuilder: (context, index) {
           return ListTile(
             onLongPress: () {
@@ -73,17 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               );
             },
-            title: const Text('Product Name'),
-            subtitle: const Column(
+            title: Text('Product Name: ${products[index].productName}'),
+            subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Product Code'),
-                Text('Total Price'),
-                Text('Units Available'),
+                Text('Product Code: ${products[index].productCode}'),
+                Text('Total Price: ${products[index].totalPrice}'),
+                Text('Quantity: ${products[index].quantity}'),
               ],
             ),
             leading: Image.network(
-              'https://render.fineartamerica.com/images/images-profile-flow/400/images/artworkimages/mediumlarge/1/asus-vx7-lamborghini-cosmin-constantin-sava.jpg',
+             products[index].image,
               width: 50,
               height: 50,
               errorBuilder: (_, __, ___) {
@@ -93,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               },
             ),
-            trailing: const Text('Unit Price'),
+            trailing: Text('Unit Price: \n${products[index].unitPrice}'),
           );
         },
         separatorBuilder: (BuildContext context, int index) {
