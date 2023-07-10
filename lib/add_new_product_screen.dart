@@ -29,7 +29,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Form(
-            key: _formstate,
+            key: formState,
             child: Column(
               children: [
                 TextFormField(
@@ -38,6 +38,10 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                     hintText: 'Product Name',
                   ),
                   validator: (String?value){
+
+                    if(value?.isEmpty ?? true){
+                      return 'enfefhdsf';
+                    }
 
                   },
                 ),
@@ -93,9 +97,9 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if(_fromstate.currentState!.validate()){
+                     /* if(fromState.currentState!.validate()){
 
-                      }
+                      }*/
                     },
                     child: const Text('Add'),
                   ),
