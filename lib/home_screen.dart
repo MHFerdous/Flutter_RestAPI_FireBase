@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:mobile_application/add_new_product_screen.dart';
+
 import 'package:http/http.dart';
-import 'package:mobile_application/product.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
