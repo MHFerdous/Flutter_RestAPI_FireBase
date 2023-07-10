@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
     Response response = await get(
       Uri.parse(
-          'https://api.tomorrow.io/v4/weather/realtime?location=toronto&apikey=traXCJeobg5nWiW56S2LmwdPz2KR3JfW'),
+          'https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=39e4e4466b60f496777d3c0a5ea52ae8'),
     );
     print(response.statusCode);
     print(response.body);
@@ -76,8 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              subtitle: Text(
-                'Updated: ${weatherInformation}',
+              subtitle: Text('weatherInformation[index].time',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 20,

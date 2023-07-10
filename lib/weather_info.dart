@@ -1,21 +1,15 @@
 class WeatherInfo {
-  final String time;
-      /*dewPoint,
-      humidity,
-      temperature,
-      temperatureApparent;*/
+  final String time, minTemperature, maxTemperature, description;
 
-
-  WeatherInfo(this.time/*, this.temperature,  this.dewPoint,
-      this.humidity, this.temperatureApparent*/);
+  WeatherInfo(
+      this.time, this.minTemperature, this.maxTemperature, this.description);
 
   factory WeatherInfo.toJson(Map<String, dynamic> e) {
     return WeatherInfo(
-      e['data']['time'],
-      /*e['dewPoint'],
-      e['humidity'],
-      e['temperature'],
-      e['temperatureApparent'],*/
+      e['temp'],
+      e['temp_min'],
+      e['temp_max'],
+      e['description'],
     );
   }
 }
