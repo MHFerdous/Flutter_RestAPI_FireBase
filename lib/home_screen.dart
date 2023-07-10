@@ -1,8 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-
-import 'package:http/http.dart';
-
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -62,27 +58,23 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('Food Recipe'),
       ),
-      body: SingleChildScrollView(
-        child: Column(children: [
-          Scrollbar(
-            thickness: 10,
-            child: ListView.separated(
-              itemCount: recipes.length,
-              primary: false,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(recipes[index]['title']!),
-                  subtitle: Text(recipes[index]['description']!),
-                  leading: Icon(Icons.fastfood),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider();
-              },
-            ),
-          ),
-        ]
+      body: Scrollbar(
+        thickness: 10,
+        child: ListView.builder(
+          itemCount: recipes.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(
+                recipes[index]['title'].toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                recipes[index]['description'].toString(),
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              leading: const Icon(Icons.fastfood),
+            );
+          },
         ),
       ),
     );
