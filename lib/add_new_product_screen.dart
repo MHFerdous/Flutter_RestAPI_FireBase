@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:http/http.dart';
 
 class AddNewProductScreen extends StatefulWidget {
   const AddNewProductScreen({Key? key}) : super(key: key);
@@ -8,15 +9,15 @@ class AddNewProductScreen extends StatefulWidget {
 }
 
 class _AddNewProductScreenState extends State<AddNewProductScreen> {
-
   final TextEditingController _nameTEController = TextEditingController();
-  final TextEditingController _productCodeTEController = TextEditingController();
+  final TextEditingController _productCodeTEController =
+      TextEditingController();
   final TextEditingController _priceTEController = TextEditingController();
   final TextEditingController _quantityTEController = TextEditingController();
   final TextEditingController _totalPriceTEController = TextEditingController();
   final TextEditingController _imageTEController = TextEditingController();
 
-  final GlobalKey<FormState> formState = GlobalKey<formState>();
+  GlobalKey<FormState> formState = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +38,11 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   decoration: const InputDecoration(
                     hintText: 'Product Name',
                   ),
-                  validator: (String?value){
-
-                    if(value?.isEmpty ?? true){
+                  validator: (String? value) {
+                    if (value?.isEmpty ?? true) {
                       return 'enfefhdsf';
                     }
-
+                    return null;
                   },
                 ),
                 const SizedBox(
@@ -96,10 +96,23 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                     /* if(fromState.currentState!.validate()){
+                    onPressed: ()  {
+                      if (formState.currentState!.validate()) {
+                     /*   Response response = await post(
+                          Uri.parse(
+                              'https://crud.teamrabbil.com/api/v1/CreateProduct'),
+                          body: {
 
-                      }*/
+                              "Img": "sdfdf",
+                              "ProductCode": "13",
+                              "ProductName": "sdfd",
+                              "Qty": "3",
+                              "TotalPrice": "3",
+                              "UnitPrice": "3"
+                          },
+                        );*/
+                      //  print(response.statusCode);
+                      }
                     },
                     child: const Text('Add'),
                   ),

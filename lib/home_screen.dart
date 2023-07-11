@@ -28,8 +28,8 @@ class _HomeScreenState extends State<HomeScreen> {
     Response response = await get(
       Uri.parse('https://crud.teamrabbil.com/api/v1/ReadProduct'),
     );
-    print(response.statusCode);
-    print(response.body);
+    /*print(response.statusCode);
+    print(response.body);*/
     final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
     //print(decodedResponse['data'].length);
 
