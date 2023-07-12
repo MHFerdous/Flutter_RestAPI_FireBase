@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) {
                   return AlertDialog(
                     shadowColor: Colors.grey,
-                    titlePadding: EdgeInsets.all(10),
+                    titlePadding: const EdgeInsets.all(10),
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
