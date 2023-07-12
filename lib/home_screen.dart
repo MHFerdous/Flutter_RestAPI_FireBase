@@ -45,6 +45,22 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
+  void deleteProduct(String id) async {
+    inProgress = true;
+    setState(() {});
+
+    Response response = await get(
+      Uri.parse('https://crud.teamrabbil.com/api/v1/DeleteProduct/$id'),
+    );
+    final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
+    if (response.statusCode == 200 && decodedResponse['status'] == 'success') {
+      getProducts();
+    } else {
+      inProgress = false;
+      setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +127,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 0,
                               ),
                               ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  deleteProduct(products[index].id);
+                                  Navigator.pop(context);
+                                },
                                 leading: const Icon(Icons.delete),
                                 title: const Text('Delete'),
                               )

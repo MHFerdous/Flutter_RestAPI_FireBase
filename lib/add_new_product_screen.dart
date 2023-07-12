@@ -12,8 +12,7 @@ class AddNewProductScreen extends StatefulWidget {
 
 class _AddNewProductScreenState extends State<AddNewProductScreen> {
   final TextEditingController _nameTEController = TextEditingController();
-  final TextEditingController _productCodeTEController =
-      TextEditingController();
+  final TextEditingController _productCodeTEController = TextEditingController();
   final TextEditingController _priceTEController = TextEditingController();
   final TextEditingController _quantityTEController = TextEditingController();
   final TextEditingController _totalPriceTEController = TextEditingController();
@@ -154,14 +153,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (formState.currentState!.validate()) {
-                        addProduct();
-                      }
-                    },
-                    child: const Text('Add'),
-                  ),
+                  child: inProgress
+                      ? const Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : ElevatedButton(
+                          onPressed: () {
+                            if (formState.currentState!.validate()) {
+                              addProduct();
+                            }
+                          },
+                          child: const Text('Add'),
+                        ),
                 ),
               ],
             ),
