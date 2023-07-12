@@ -15,7 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String? description;
   int? temp2;
   String? location;
-  String? userLocation = 'New York';
+  String? userLocation = 'Russia';
   String? humidity;
   int? maxTemp;
   int? minTemp;
