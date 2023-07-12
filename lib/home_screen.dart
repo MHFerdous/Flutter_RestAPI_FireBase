@@ -10,10 +10,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String? time;
   String? temp;
   String? description = 'r';
   int? temp2;
   String? location;
+  String? userLocation = 'Sylhet';
   String? humidity;
   int? maxTemp;
   int? minTemp;
@@ -86,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
     Response response = await get(
       Uri.parse(
-          'https://api.tomorrow.io/v4/weather/realtime?location=sylhet&apikey=traXCJeobg5nWiW56S2LmwdPz2KR3JfW'),
+          'https://api.tomorrow.io/v4/weather/realtime?location=$userLocation&apikey=traXCJeobg5nWiW56S2LmwdPz2KR3JfW'),
     );
 
     final data = jsonDecode(response.body);
@@ -102,6 +104,17 @@ class _HomeScreenState extends State<HomeScreen> {
     minTemp = data['data']['values']['temperature'].toInt() - 5;
     humidity = data['data']['values']['humidity'].toString();
     location = data['location']['name'].toString();
+    time = data['data']['time']
+        .toString()
+        .replaceAll(
+          'T',
+          '\n\nTime : ',
+        )
+        .replaceAll(':00Z', '  ');
+
+    if (response.statusCode != 200) {
+      const Text('Failed fetching data');
+    }
 
     inProgress = false;
     setState(() {});
@@ -124,111 +137,119 @@ class _HomeScreenState extends State<HomeScreen> {
           )
         ],
       ),
-      body: Center(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 100,
-            ),
-            ListTile(
-              title: const Text(
-                'Current Location',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-              subtitle: Column(
-                children: [
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    location.toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey.shade300,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 70, right: 70),
+      body: inProgress
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Center(
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 100,
+                  ),
                   ListTile(
-                    leading: const Icon(
-                      Icons.sunny_snowing,
-                      size: 35,
-                      color: Colors.yellowAccent,
-                    ),
                     title: Text(
-                      temp.toString(),
+                      location.toString(),
                       textAlign: TextAlign.center,
                       style: const TextStyle(
-                        fontSize: 32,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
                     ),
-                    trailing: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'max : ${maxTemp.toString()}',
-                            style: TextStyle(
-                                color: Colors.grey.shade100, letterSpacing: 1),
+                    subtitle: Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          time!,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.grey.shade300,
                           ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            'min : ${minTemp.toString()}',
-                            style: TextStyle(
-                                color: Colors.grey.shade100, letterSpacing: 1),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 40,
                   ),
-                  Text(
-                    'Humidity : ${humidity.toString()}',
-                    style: const TextStyle(
-                        color: Colors.white, letterSpacing: 0.8, fontSize: 16),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 70, right: 70),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Icon(
+                            Icons.sunny_snowing,
+                            size: 35,
+                            color: Colors.yellowAccent,
+                          ),
+                          title: Text(
+                            temp.toString(),
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 32,
+                              color: Colors.white,
+                            ),
+                          ),
+                          trailing: Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'max : ${maxTemp.toString()}',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade100,
+                                      letterSpacing: 1),
+                                ),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Text(
+                                  'min : ${minTemp.toString()}',
+                                  style: TextStyle(
+                                      color: Colors.grey.shade100,
+                                      letterSpacing: 1),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          'Humidity : ${humidity.toString()}',
+                          style: const TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 0.8,
+                              fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  ListTile(
+                    title: Column(
+                      children: [
+                        Text(
+                          description.toString(),
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            ListTile(
-              title: Column(
-                children: [
-                  Text(
-                    description.toString(),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
     );
   }
 }
