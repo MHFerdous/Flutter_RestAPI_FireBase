@@ -25,10 +25,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
   void addProduct() async {
     inProgress = true;
-    if(mounted){
-      setState(() {
-
-      });
+    if (mounted) {
+      setState(() {});
     }
     Response response = await post(
       Uri.parse('https://crud.teamrabbil.com/api/v1/CreateProduct'),
@@ -45,10 +43,8 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
       ),
     );
     inProgress = false;
-    if(mounted){
-      setState(() {
-
-      });
+    if (mounted) {
+      setState(() {});
     }
 
     if (response.statusCode == 200) {
