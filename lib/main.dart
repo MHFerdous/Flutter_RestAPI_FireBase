@@ -2,7 +2,9 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -78,12 +80,13 @@ class HomeScreen extends StatelessWidget {
               fit: BoxFit.contain,
             ),
             Container(
-                margin: EdgeInsets.only(top: 10),
-                child: Image.asset(
-                  'assets/img.png',
-                  width: 500,
-                  height: 100,
-                )),
+              margin: EdgeInsets.only(top: 10),
+              child: Image.asset(
+                'assets/R.jpeg',
+                width: 500,
+                height: 100,
+              ),
+            ),
           ],
         ),
       ),
