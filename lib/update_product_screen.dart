@@ -183,4 +183,3 @@ class _UpdateProductScreenState extends State<UpdateProductScreen> {
     );
   }
 }
-

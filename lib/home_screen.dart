@@ -34,7 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
     final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
     //print(decodedResponse['data'].length);
 
-
     if (response.statusCode == 200 && decodedResponse['status'] == 'success') {
       products.clear();
       for (var e in decodedResponse['data']) {
@@ -123,7 +122,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ListTile(
                                 onTap: () {
                                   Navigator.pop(context);
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateProductScreen(product: products[index])));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              UpdateProductScreen(
+                                                  product: products[index])));
                                 },
                                 leading: const Icon(Icons.edit),
                                 title: const Text('Edit'),
