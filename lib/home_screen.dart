@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
     //print(decodedResponse['data'].length);
 
+
     if (response.statusCode == 200 && decodedResponse['status'] == 'success') {
       products.clear();
       for (var e in decodedResponse['data']) {
