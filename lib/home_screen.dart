@@ -12,10 +12,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String? time;
   String? temp;
-  String? description = 'r';
+  String? description;
   int? temp2;
   String? location;
-  String? userLocation = 'Sylhet';
+  String? userLocation = 'New York';
   String? humidity;
   int? maxTemp;
   int? minTemp;
@@ -182,7 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
                         ListTile(
                           leading: const Icon(
-                            Icons.sunny_snowing,
+                            Icons.snowing,
                             size: 35,
                             color: Colors.yellowAccent,
                           ),
