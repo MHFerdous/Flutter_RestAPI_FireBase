@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
             wordSpacing: 0.5,
             letterSpacing: 0.5,
             fontSize: 20,
-            //decoration: TextDecoration.underline,
+            decoration: TextDecoration.underline,
           ),
         ),
         leading: IconButton(
@@ -42,16 +42,20 @@ class HomeScreen extends StatelessWidget {
           icon: Icon(Icons.menu),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.call),
+          ),
         ],
         backgroundColor: Colors.black38,
         centerTitle: true,
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [Text('Hello Ferdous')],
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [Text('Hello Ferdous')],
+        ),
+      ),
     );
   }
 }
