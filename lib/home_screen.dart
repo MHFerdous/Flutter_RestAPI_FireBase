@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:mobile_application/weather_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -11,14 +10,75 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<WeatherInfo> weatherInformation = [];
-
+  String? temp;
+  String? description = 'r';
+  int? temp2;
+  String? location;
+  String? humidity;
+  int? maxTemp;
+  int? minTemp;
   bool inProgress = false;
+
+  descriptionModel() {
+    if ((temp2 ?? 0) < -20) {
+      description = 'Too much snowing';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) < -15 && (temp2 ?? 0) >= -10) {
+      description = 'Snow';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > -9 && (temp2 ?? 0) <= -5) {
+      description = 'Too much cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > -4 && (temp2 ?? 0) <= 0) {
+      description = 'Mostly Cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 0 && (temp2 ?? 0) <= 5) {
+      description = 'Cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 6 && (temp2 ?? 0) <= 10) {
+      description = 'Cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 11 && (temp2 ?? 0) <= 15) {
+      description = 'Weather is cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 16 && (temp2 ?? 0) <= 20) {
+      description = 'Sunny and Cool';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 21 && (temp2 ?? 0) <= 25) {
+      description = 'Sunny';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 26 && (temp2 ?? 0) <= 30) {
+      description = 'Mostly Sunny';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 31 && (temp2 ?? 0) < 35) {
+      description = 'Hot';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 36 && (temp2 ?? 0) <= 40) {
+      description = 'Mostly Hot';
+      setState(() {});
+    }
+    if ((temp2 ?? 0) > 40) {
+      description = 'Too much hot';
+      setState(() {});
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     getWeather();
+    descriptionModel();
   }
 
   void getWeather() async {
@@ -26,19 +86,23 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
     Response response = await get(
       Uri.parse(
-          'https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=39e4e4466b60f496777d3c0a5ea52ae8'),
+          'https://api.tomorrow.io/v4/weather/realtime?location=sylhet&apikey=traXCJeobg5nWiW56S2LmwdPz2KR3JfW'),
     );
-    print(response.statusCode);
-    print(response.body);
-    final Map<String, dynamic> decodedResponse = jsonDecode(response.body);
 
-    if (response.statusCode == 200) {
-      for (var e in decodedResponse['data']) {
-        weatherInformation.add(
-          WeatherInfo.toJson(e),
-        );
-      }
-    }
+    final data = jsonDecode(response.body);
+    temp = data['data']['values']['temperature'].toString();
+    temp2 = data['data']['values']['temperature'].toInt();
+
+    /// ami je api niyechi setay max temp nai. Tai ami temp er shate +10 kore diyechi, karon api te max temp data nai
+
+    maxTemp = data['data']['values']['temperature'].toInt() + 10;
+
+    /// ami je api niyechi setay min temp nai. Tai ami temp er shate -5 kore diyechi, karon api te min temp data nai
+
+    minTemp = data['data']['values']['temperature'].toInt() - 5;
+    humidity = data['data']['values']['humidity'].toString();
+    location = data['location']['name'].toString();
+
     inProgress = false;
     setState(() {});
   }
@@ -67,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 100,
             ),
             ListTile(
-              title: Text(
+              title: const Text(
                 'Current Location',
                 textAlign: TextAlign.center,
                 style: TextStyle(
@@ -76,71 +140,90 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.white,
                 ),
               ),
-              subtitle: Text('weatherInformation[index].time',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey.shade300,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 60,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 70, right: 70),
-              child: ListTile(
-                leading: Image.network(
-                  'fhoshfsudfhskdf',
-                  width: 50,
-                  height: 50,
-                  errorBuilder: (_, __, ___) {
-                    return Icon(
-                      Icons.cloud_download,
-                      size: 32,
-                    );
-                  },
-                ),
-                title: Text(
-                  weatherInformation[index].temperature,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 40,
-                    color: Colors.white,
+              subtitle: Column(
+                children: [
+                  const SizedBox(
+                    height: 10,
                   ),
-                ),
-                trailing: Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Column(
-                    children: [
-                      Text(
-                        'max',
-                        style: TextStyle(
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                      Text(
-                        'min',
-                        style: TextStyle(
-                          color: Colors.grey.shade100,
-                        ),
-                      ),
-                    ],
+                  Text(
+                    location.toString(),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey.shade300,
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 40,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 70, right: 70),
+              child: Column(
+                children: [
+                  ListTile(
+                    leading: const Icon(
+                      Icons.sunny_snowing,
+                      size: 35,
+                      color: Colors.yellowAccent,
+                    ),
+                    title: Text(
+                      temp.toString(),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 32,
+                        color: Colors.white,
+                      ),
+                    ),
+                    trailing: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            'max : ${maxTemp.toString()}',
+                            style: TextStyle(
+                                color: Colors.grey.shade100, letterSpacing: 1),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            'min : ${minTemp.toString()}',
+                            style: TextStyle(
+                                color: Colors.grey.shade100, letterSpacing: 1),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Humidity : ${humidity.toString()}',
+                    style: const TextStyle(
+                        color: Colors.white, letterSpacing: 0.8, fontSize: 16),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             ListTile(
-              title: Text(
-                'Hasan Thundu',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
+              title: Column(
+                children: [
+                  Text(
+                    description.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             )
           ],
