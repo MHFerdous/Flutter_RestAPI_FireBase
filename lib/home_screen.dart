@@ -102,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 title: Text(
-                  '69',
+                  weatherInformation[index].temperature,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
@@ -130,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             ListTile(

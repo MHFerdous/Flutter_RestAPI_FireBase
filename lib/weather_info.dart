@@ -1,8 +1,8 @@
 class WeatherInfo {
-  final String time, minTemperature, maxTemperature, description;
+  final String temperature, minTemperature, maxTemperature, description;
 
   WeatherInfo(
-      this.time, this.minTemperature, this.maxTemperature, this.description);
+      this.temperature, this.minTemperature, this.maxTemperature, this.description);
 
   factory WeatherInfo.toJson(Map<String, dynamic> e) {
     return WeatherInfo(
