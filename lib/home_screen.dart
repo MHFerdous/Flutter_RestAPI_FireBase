@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_application/add_new_product_screen.dart';
 import 'package:http/http.dart';
 import 'package:mobile_application/product.dart';
+import 'package:mobile_application/update_product_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -120,7 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               ListTile(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> UpdateProductScreen(product: products[index])));
+                                },
                                 leading: const Icon(Icons.edit),
                                 title: const Text('Edit'),
                               ),
