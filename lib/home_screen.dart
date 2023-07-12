@@ -2,19 +2,19 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
-class WeatherScreen extends StatefulWidget {
-  const WeatherScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  _WeatherScreenState createState() => _WeatherScreenState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _WeatherScreenState extends State<WeatherScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   String _location = '';
   String _temperature = '';
   String _weatherDescription = '';
   String _weatherIconUrl = '';
-  String _feelsLike = '';
+  //String _feelsLike = '';
   String _tempMin = '';
   String _tempMax = '';
   bool _isLoading = false;
@@ -45,7 +45,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         _location = jsonData['name'];
         _temperature = mainData['temp'].toString();
         _weatherDescription = weatherData['description'];
-        _feelsLike = mainData['feels_like'].toString();
+       // _feelsLike = mainData['feels_like'].toString();
         _tempMax = mainData['temp_max'].toString();
         _tempMin = mainData['temp_min'].toString();
         _weatherIconUrl =
@@ -167,17 +167,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     'Min: $_tempMin°C',
                                     style: const TextStyle(color: Colors.white),
                                   ),
-                                  Text(
-                                    'Feels Like: $_feelsLike°C',
-                                    style: const TextStyle(color: Colors.white),
-                                  ),
                                 ],
                               )
                             ],
                           ),
                           const SizedBox(height: 18.0),
                           Text(
-                            'Weather: $_weatherDescription',
+                            _weatherDescription,
                             style: const TextStyle(
                                 fontSize: 20, color: Colors.white),
                           ),
