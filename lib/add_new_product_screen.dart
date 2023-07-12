@@ -21,10 +21,17 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
 
   GlobalKey<FormState> formState = GlobalKey<FormState>();
 
+  bool inProgress = false;
+
   void addProduct() async {
+    inProgress = true;
+    if(mounted){
+      setState(() {
+
+      });
+    }
     Response response = await post(
-      Uri.parse(
-          'https://crud.teamrabbil.com/api/v1/CreateProduct'),
+      Uri.parse('https://crud.teamrabbil.com/api/v1/CreateProduct'),
       headers: {'Content-type': 'application/json'},
       body: jsonEncode(
         {
@@ -37,21 +44,36 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
         },
       ),
     );
+    inProgress = false;
+    if(mounted){
+      setState(() {
 
-    if(response.statusCode == 200){
+      });
+    }
+
+    if (response.statusCode == 200) {
       final decodedBody = jsonDecode(response.body);
-      if(decodedBody['status'] == 'success'){
-        if(mounted){
+      if (decodedBody['status'] == 'success') {
+        if (mounted) {
           _imageTEController.clear();
           _productCodeTEController.clear();
           _nameTEController.clear();
           _quantityTEController.clear();
           _totalPriceTEController.clear();
           _priceTEController.clear();
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('New product successfully added')
-          ),);
-
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('New product successfully added'),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('New product add failed, try again'),
+            ),
+          );
         }
       }
     }
@@ -59,7 +81,6 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     print(response.statusCode);
     print(response.body);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +161,7 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (formState.currentState!.validate()) {
-                       addProduct();
+                        addProduct();
                       }
                     },
                     child: const Text('Add'),

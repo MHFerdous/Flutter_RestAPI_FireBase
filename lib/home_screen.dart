@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //print(decodedResponse['data'].length);
 
     if (response.statusCode == 200 && decodedResponse['status'] == 'success') {
+      products.clear();
       for (var e in decodedResponse['data']) {
         products.add(
           Product.toJson(e),
@@ -50,6 +51,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('CURD App'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {
+              getProducts();
+            },
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
