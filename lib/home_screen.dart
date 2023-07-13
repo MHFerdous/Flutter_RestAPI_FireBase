@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: size.height / 10,
             ),
-            // FractionallySizedBox(heightFactor: ,),
+             //FractionallySizedBox(heightFactor: ,),
             Container(
               color: Colors.green,
               height: 200,
