@@ -11,8 +11,9 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Responsive Widgets'),
       ),
-      body: Center(
-        child: Column(
+      body: LayoutBuilder(builder: (context, constraints) {
+        print(constraints.maxWidth);
+        return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Row(
@@ -32,7 +33,14 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: size.height / 10,
             ),
-             //FractionallySizedBox(heightFactor: ,),
+
+            Text(size.width.toString()),
+            if (constraints.maxWidth > 1200) const Text('Desktop Screen'),
+            if (constraints.maxWidth > 700 && constraints.maxWidth < 1200)
+              const Text('Tablet Screen'),
+            if (constraints.maxWidth <= 700) const Text('Phone Screen'),
+
+            //FractionallySizedBox(heightFactor: ,),
             Container(
               color: Colors.green,
               height: 200,
@@ -46,8 +54,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
+        );
+      }),
     );
   }
 }
