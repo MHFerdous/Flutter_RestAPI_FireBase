@@ -5,6 +5,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.sizeOf(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Responsive Widgets'),
@@ -27,13 +29,17 @@ class HomeScreen extends StatelessWidget {
                 Text('Displaying text on the screen'),
               ],
             ),
+            SizedBox(
+              height: size.height / 10,
+            ),
+            // FractionallySizedBox(heightFactor: ,),
             Container(
               color: Colors.green,
               height: 200,
               width: double.infinity,
               alignment: Alignment.center,
               child: AspectRatio(
-                aspectRatio: 10 / 1,
+                aspectRatio: 16 / 9,
                 child: Container(
                   color: Colors.black,
                 ),
