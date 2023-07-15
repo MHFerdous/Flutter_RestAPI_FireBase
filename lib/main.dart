@@ -75,7 +75,10 @@ class HomeScreen extends StatelessWidget {
           icon: Icon(Icons.menu),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.call),
+          ),
         ],
         backgroundColor: Colors.black38,
         centerTitle: true,
@@ -93,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               color: Colors.red,
             );
           },
-        ));*/
+        ),);*/
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -105,10 +108,12 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title:
-                        Text(universities.values.elementAt(index).toString()),
-                    subtitle:
-                        Text(universities.keys.elementAt(index).toString()),
+                    title: Text(
+                      universities.values.elementAt(index).toString(),
+                    ),
+                    subtitle: Text(
+                      universities.keys.elementAt(index).toString(),
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) {
