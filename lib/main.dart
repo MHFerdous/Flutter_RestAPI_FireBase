@@ -40,44 +40,75 @@ class HomeScreen extends StatelessWidget {
           icon: Icon(Icons.menu),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: Icon(Icons.call)),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.call),
+          ),
         ],
         backgroundColor: Colors.black38,
         centerTitle: true,
       ),
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ListTile(
-            onTap: () {
-              print('tapped');
-            },
-            title: Text('User Name'),
-            subtitle: Text('Designation'),
-            leading: Icon(Icons.account_circle_rounded),
-            trailing: Icon(Icons.volume_mute_rounded),
-            tileColor: Colors.grey.shade300,
-            contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
-          ),
-          Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            spacing: 20,
-            //direction: Axis.vertical,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-              ElevatedButton(onPressed: () {}, child: Text('Hello')),
-            ],
-          )
-        ],
-      )),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ListTile(
+              onTap: () {
+                print('tapped');
+              },
+              title: Text('User Name'),
+              subtitle: Text('Designation'),
+              leading: Icon(Icons.account_circle_rounded),
+              trailing: Icon(Icons.volume_mute_rounded),
+              tileColor: Colors.grey.shade300,
+              contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 0),
+            ),
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              spacing: 20,
+              //direction: Axis.vertical,
+              children: [
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Hello'),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }
