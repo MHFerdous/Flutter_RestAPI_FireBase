@@ -34,8 +34,9 @@ class _ProductListScreenState extends State<ProductListScreen> {
                     MaterialPageRoute(
                       builder: (_) => const UserScreen(),
                     ),
-                    (route) =>
-                        true); // in case of true pushAndRemoveUntil == push
+                    (route) => true);
+
+                /// in case of true pushAndRemoveUntil == push
               },
               child: const Text('User List'),
             ),
