@@ -14,7 +14,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Home (1)'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

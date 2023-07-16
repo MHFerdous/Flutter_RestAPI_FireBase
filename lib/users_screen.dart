@@ -13,7 +13,8 @@ class _UserScreenState extends State<UserScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User List'),
+        title: const Text('User List (3)'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(

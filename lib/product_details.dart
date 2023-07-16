@@ -8,7 +8,8 @@ class ProductDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product Name'),
+        title: const Text('Product Name (4)'),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
