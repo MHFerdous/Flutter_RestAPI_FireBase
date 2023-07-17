@@ -7,17 +7,34 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Profile'),
+        title: const Text('Orientation'),
+        centerTitle: true,
       ),
+      body: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            return Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(orientation.toString()),
+                  Text(orientation.name),
+                ],
+              ),
+            );
+          }
 
-      body: Column(
-        children: [
-          Placeholder(
-            child: Image.network('https://render.fineartamerica.com/images/images-profile-flow/400/images-medium-large-5/lioness-displaying-dangerous-teeth-in-a-rainstorm-johan-swanepoel.jpg'),
-          )
-        ],
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(orientation.toString()),
+                Text(orientation.name),
+              ],
+            ),
+          );
+        },
       ),
-
     );
   }
 }
