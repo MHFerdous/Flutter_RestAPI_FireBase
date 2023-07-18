@@ -17,11 +17,12 @@ class MyApp extends StatelessWidget {
       home: const HomeScreen(),
       themeMode: ThemeMode.dark,
       theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.red,
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.blueGrey,
-          )),
+        brightness: Brightness.light,
+        primarySwatch: Colors.red,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.blueGrey,
+        ),
+      ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.red,
