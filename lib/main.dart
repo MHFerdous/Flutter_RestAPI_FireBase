@@ -35,6 +35,7 @@ class _GoodScreenState extends State<GoodScreen> {
     super.initState();
   }
 
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
   }
