@@ -35,9 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   Expanded(
-                      child: Container(
-                    color: Colors.blueAccent,
-                  ))
+                    child: Container(
+                      color: Colors.blueAccent,
+                    ),
+                  )
                 ],
               ),
             ),
