@@ -53,15 +53,16 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  bottom: 40,
-                  right: 40,
-                  left: 40,
-                  top: 40,
-                  child: Container(
-                    /*width: 25,
+                bottom: 40,
+                right: 40,
+                left: 40,
+                top: 40,
+                child: Container(
+                  /*width: 25,
                     height: 25,*/
-                    color: Colors.black,
-                  )),
+                  color: Colors.black,
+                ),
+              ),
               Positioned.fill(
                 child: Align(
                   alignment: Alignment.center,
