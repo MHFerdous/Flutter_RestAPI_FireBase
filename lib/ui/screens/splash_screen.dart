@@ -10,18 +10,28 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-void navigateToLogin() {
-  Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-      (route) => false);
-
-
-}
-
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    navigateToLogin();
+  }
+
+  void navigateToLogin() {
+    Future.delayed(
+      const Duration(seconds: 5),
+    ).then(
+      (_) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+            (route) => false);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
