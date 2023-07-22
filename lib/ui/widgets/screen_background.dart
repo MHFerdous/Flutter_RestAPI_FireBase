@@ -3,7 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import '../utils/assets_utils.dart';
 
 class ScreenBackground extends StatelessWidget {
-  const ScreenBackground({Key? key, required Center child}) : super(key: key);
+  final Widget child;
+  const ScreenBackground({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +15,10 @@ class ScreenBackground extends StatelessWidget {
           height: double.infinity,
           child: SvgPicture.asset(
             AssetsUtils.backgroundSVG,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
           ),
         ),
+        SafeArea(child: child)
       ],
     );
   }
