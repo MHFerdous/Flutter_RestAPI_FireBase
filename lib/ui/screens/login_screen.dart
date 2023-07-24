@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/ui/screens/bottom_nav_base_screen.dart';
 import 'package:mobile_application/ui/screens/email_verification_screen.dart';
 import 'package:mobile_application/ui/screens/signup_screen.dart';
 import 'package:mobile_application/ui/widgets/screen_background.dart';
@@ -47,7 +48,14 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const BottomNavBaseScreen(),
+                            ),
+                            (route) => false);
+                      },
                       child: const Icon(Icons.arrow_circle_right_outlined),
                     ),
                   ),
