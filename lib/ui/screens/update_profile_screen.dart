@@ -1,16 +1,26 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile_application/ui/widgets/user_profile_banner.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({Key? key}) : super(key: key);
 
-  pickImage (){
+  @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
 
-    final ImagePicker picker = ImagePicker();
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  Future pickImageFromGallery() async {
+    final galleryImage =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
 
+    setState(() {
+      _selectedImage = File(galleryImage!.path);
+    });
   }
 
-  const UpdateProfileScreen({Key? key}) : super(key: key);
+  File? _selectedImage;
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +48,13 @@ class UpdateProfileScreen extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        picker();
+                        pickImageFromGallery();
                       },
                       child: const Text('Photo'),
                     ),
+                    _selectedImage != null
+                        ? Image.file(_selectedImage!)
+                        : const Text('data'),
                     const SizedBox(
                       height: 16,
                     ),

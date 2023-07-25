@@ -16,7 +16,8 @@ class UserProfileBanner extends StatelessWidget {
         contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
         tileColor: Colors.green,
         leading: CircleAvatar(
-          backgroundImage: NetworkImage('sdfd'),
+          backgroundImage: NetworkImage(
+              'https://media.licdn.com/dms/image/D5603AQHbatj4wyrslw/profile-displayphoto-shrink_400_400/0/1680845343540?e=1695859200&v=beta&t=fdwnYqh-ohhrB3jqr0_x2JQeZDEM6zDVU2d34lzSc-0'),
           radius: 15,
         ),
         title: Text(
