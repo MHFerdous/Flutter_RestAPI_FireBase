@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/ui/screens/update_profile_screen.dart';
 import '../widgets/task_list_tile.dart';
 import '../widgets/user_profile_banner.dart';
 
@@ -11,7 +12,16 @@ class InProgressTaskScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const UserProfileBanner(),
+            UserProfileBanner(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UpdateProfileScreen(),
+                  ),
+                );
+              },
+            ),
             Expanded(
               child: ListView.separated(
                 itemCount: 20,

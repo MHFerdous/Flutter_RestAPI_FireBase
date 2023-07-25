@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/ui/screens/update_profile_screen.dart';
 import 'package:mobile_application/ui/widgets/user_profile_banner.dart';
 
 class AddNewTaskScreen extends StatelessWidget {
@@ -10,9 +11,17 @@ class AddNewTaskScreen extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-
             children: [
-              const UserProfileBanner(),
+              UserProfileBanner(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const UpdateProfileScreen(),
+                    ),
+                  );
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
