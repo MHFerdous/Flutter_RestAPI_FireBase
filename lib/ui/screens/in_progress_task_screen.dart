@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/task_list_tile.dart';
 import '../widgets/user_profile_banner.dart';
 
-class InProgressTastScreen extends StatelessWidget {
-  const InProgressTastScreen({Key? key}) : super(key: key);
+class InProgressTaskScreen extends StatelessWidget {
+  const InProgressTaskScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,6 @@ class InProgressTastScreen extends StatelessWidget {
         child: Column(
           children: [
             const UserProfileBanner(),
-
             Expanded(
               child: ListView.separated(
                 itemCount: 20,

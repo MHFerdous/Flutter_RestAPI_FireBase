@@ -15,7 +15,7 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
   int _selectedScreenIndex = 0;
   final List<Widget> _screens = const [
     NewTaskScreen(),
-    InProgressTastScreen(),
+    InProgressTaskScreen(),
     CancelledTaskScreen(),
     CompletedTaskScreen(),
   ];

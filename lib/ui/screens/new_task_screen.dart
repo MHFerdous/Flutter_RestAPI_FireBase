@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/ui/screens/add_new_task_screen.dart';
 import '../widgets/summary_card.dart';
 import '../widgets/task_list_tile.dart';
 import '../widgets/user_profile_banner.dart';
@@ -59,6 +60,17 @@ class NewTaskScreen extends StatelessWidget {
             )
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddNewTaskScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

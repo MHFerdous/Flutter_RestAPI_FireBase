@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:mobile_application/ui/screens/login_screen.dart';
+import 'package:mobile_application/ui/screens/auth/login_screen.dart';
 import 'package:mobile_application/ui/utils/assets_utils.dart';
 import 'package:mobile_application/ui/widgets/screen_background.dart';
 

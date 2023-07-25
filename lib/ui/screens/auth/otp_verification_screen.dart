@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_application/ui/screens/login_screen.dart';
-import 'package:mobile_application/ui/screens/reset_password_screen.dart';
+import 'package:mobile_application/ui/screens/auth/login_screen.dart';
+import 'package:mobile_application/ui/screens/auth/reset_password_screen.dart';
 import 'package:mobile_application/ui/widgets/screen_background.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -57,12 +57,9 @@ class OtpVerificationScreen extends StatelessWidget {
                   animationDuration: const Duration(milliseconds: 300),
                   enableActiveFill: true,
                   cursorColor: Colors.green,
-                  onCompleted: (v) {
-                    print("Completed");
-                  },
+                  onCompleted: (v) {},
                   onChanged: (value) {},
                   beforeTextPaste: (text) {
-                    print("Allowing to paste $text");
                     return true;
                   },
                   appContext: context,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/ui/screens/auth/signup_screen.dart';
 import 'package:mobile_application/ui/screens/bottom_nav_base_screen.dart';
 import 'package:mobile_application/ui/screens/email_verification_screen.dart';
-import 'package:mobile_application/ui/screens/signup_screen.dart';
 import 'package:mobile_application/ui/widgets/screen_background.dart';
 
 class LoginScreen extends StatelessWidget {
