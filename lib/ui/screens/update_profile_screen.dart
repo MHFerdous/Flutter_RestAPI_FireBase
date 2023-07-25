@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mobile_application/ui/widgets/user_profile_banner.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
+
+  pickImage (){
+
+    final ImagePicker picker = ImagePicker();
+
+  }
+
   const UpdateProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,11 +36,11 @@ class UpdateProfileScreen extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    const TextField(
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        hintText: 'Photo',
-                      ),
+                    ElevatedButton(
+                      onPressed: () {
+                        picker();
+                      },
+                      child: const Text('Photo'),
                     ),
                     const SizedBox(
                       height: 16,
@@ -47,7 +55,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       height: 16,
                     ),
                     const TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         hintText: 'First Name',
                       ),
@@ -56,7 +64,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       height: 16,
                     ),
                     const TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
                         hintText: 'Last Name',
                       ),
@@ -65,7 +73,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       height: 16,
                     ),
                     const TextField(
-                      keyboardType: TextInputType.emailAddress,
+                      keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         hintText: 'Phone',
                       ),
@@ -74,6 +82,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       height: 16,
                     ),
                     const TextField(
+                      obscureText: true,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         hintText: 'Password',
