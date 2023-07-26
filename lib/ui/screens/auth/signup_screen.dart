@@ -20,7 +20,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  bool _signUpInProgress = false;
+
   Future<void> userSignUp() async {
+    _signUpInProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
     final NetworkResponse response =
         await NetworkCaller().postRequest(Urls.registration, <String, dynamic>{
       "email": _emailTEController.text.trim(),
@@ -30,7 +36,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
       "password": _passwordTEController.text,
       "photo": ""
     });
+    _signUpInProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
     if (response.isSuccess) {
+      _emailTEController.clear();
+      _firstNameTEController.clear();
+      _lastNameTEController.clear();
+      _phoneTEController.clear();
+      _phoneTEController.clear();
+      _passwordTEController.clear();
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -99,7 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         hintText: 'First name',
                       ),
                       validator: (String? value) {
-                        if (value?.isEmpty ?? true && value!.length < 3) {
+                        if ((value?.isEmpty ?? true) || value!.length < 3) {
                           return 'Enter your first name';
                         }
                         return null;
@@ -115,7 +131,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         hintText: 'Last name',
                       ),
                       validator: (String? value) {
-                        if (value?.isEmpty ?? true && value!.length < 3) {
+                        if ((value?.isEmpty ?? true) || value!.length < 3) {
                           return 'Enter your last name';
                         }
                         return null;
@@ -131,8 +147,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         hintText: 'Phone',
                       ),
                       validator: (String? value) {
-                        if ((value?.isEmpty ?? true) || value!.length < 11) {
+                        if (value?.isEmpty ?? true) {
                           return 'Enter your phone number';
+                        }
+                        if (value!.length < 11 || value.length > 11) {
+                          return 'Enter a valid phone number';
                         }
                         return null;
                       },
@@ -161,14 +180,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          if (!_formKey.currentState!.validate()) {
-                            return;
-                          }
-                          userSignUp();
-                        },
-                        child: const Icon(Icons.arrow_circle_right_outlined),
+                      child: Visibility(
+                        visible: _signUpInProgress == false,
+                        replacement: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            userSignUp();
+                          },
+                          child: const Icon(Icons.arrow_forward_ios_outlined),
+                        ),
                       ),
                     ),
                     const SizedBox(
