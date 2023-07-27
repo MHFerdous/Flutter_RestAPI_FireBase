@@ -15,7 +15,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailTEController = TextEditingController();
   final TextEditingController _passwordTEController = TextEditingController();
 
-  final GlobalKey<FormState> _keyState = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.all(14.0),
             child: Center(
               child: Form(
-                key: _keyState,
+                key: _formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +37,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text('Get Started With',
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(
-                      height: 16,
+                      height: 24,
                     ),
                     TextFormField(
                       controller: _emailTEController,
@@ -80,6 +80,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                         /* if (!_formKey.currentState!.validate()) {
+                            return;
+                          }*/
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
@@ -88,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               (route) => false);
                         },
-                        child: const Icon(Icons.arrow_circle_right_outlined),
+                        child: const Icon(Icons.arrow_forward_ios_outlined),
                       ),
                     ),
                     const SizedBox(
@@ -152,4 +155,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

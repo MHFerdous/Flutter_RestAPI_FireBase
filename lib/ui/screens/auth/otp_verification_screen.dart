@@ -18,7 +18,7 @@ class OtpVerificationScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 130,
+                  height: 150,
                 ),
                 Text(
                   'PIN Verification',

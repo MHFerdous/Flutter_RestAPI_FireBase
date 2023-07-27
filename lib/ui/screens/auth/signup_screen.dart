@@ -85,7 +85,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     Text('Join With Us',
                         style: Theme.of(context).textTheme.titleLarge),
                     const SizedBox(
-                      height: 16,
+                      height: 24,
                     ),
                     TextFormField(
                       controller: _emailTEController,
