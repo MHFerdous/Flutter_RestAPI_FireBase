@@ -44,11 +44,12 @@ class _BottomNavBaseScreenState extends State<BottomNavBaseScreen> {
             label: 'New',
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_tree), label: 'In Progress'),
+              icon: Icon(Icons.access_time_filled_outlined),
+              label: 'In Progress'),
           BottomNavigationBarItem(
               icon: Icon(Icons.cancel_outlined), label: 'Cancel'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.done_all), label: 'Completed'),
+              icon: Icon(Icons.done_all_outlined), label: 'Completed'),
         ],
       ),
     );
