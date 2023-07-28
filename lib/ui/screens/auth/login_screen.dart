@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/data/models/network_response.dart';
+import 'package:mobile_application/data/services/network_caller.dart';
+import 'package:mobile_application/data/utils/urls.dart';
 import 'package:mobile_application/ui/screens/auth/signup_screen.dart';
 import 'package:mobile_application/ui/screens/bottom_nav_base_screen.dart';
 import 'package:mobile_application/ui/screens/email_verification_screen.dart';
@@ -16,6 +19,43 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _passwordTEController = TextEditingController();
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool _logInInProgress = false;
+
+  Future<void> login() async {
+    _logInInProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+    Map<String, dynamic> requestBody = {
+      "email": _emailTEController.text.trim(),
+      "password": _passwordTEController.text
+    };
+    final NetworkResponse response =
+        await NetworkCaller().postRequest(Urls.login, requestBody);
+    _logInInProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+    if (response.isSuccess) {
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const BottomNavBaseScreen(),
+            ),
+            (route) => false);
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Incorrect email or password'),
+          ),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,20 +118,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                         /* if (!_formKey.currentState!.validate()) {
-                            return;
-                          }*/
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const BottomNavBaseScreen(),
-                              ),
-                              (route) => false);
-                        },
-                        child: const Icon(Icons.arrow_forward_ios_outlined),
+                      child: Visibility(
+                        visible: _logInInProgress == false,
+                        replacement:
+                            const Center(child: CircularProgressIndicator()),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            if (!_formKey.currentState!.validate()) {
+                              return;
+                            }
+                            login();
+                          },
+                          child: const Icon(Icons.arrow_forward_ios_outlined),
+                        ),
                       ),
                     ),
                     const SizedBox(
