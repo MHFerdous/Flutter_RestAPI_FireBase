@@ -1,15 +1,15 @@
 import 'dart:convert';
-
 import 'package:mobile_application/data/models/login_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthUtility {
   AuthUtility._();
+  static LoginModel userInfo = LoginModel();
   static Future<void> saveUserInfo(LoginModel model) async {
     SharedPreferences _sharedPrefs = await SharedPreferences.getInstance();
     await _sharedPrefs.setString(
       'user-data',
-      model.toJson().toString(),
+      jsonEncode(model.toJson()),
     );
   }
 
@@ -28,6 +28,10 @@ class AuthUtility {
 
   static Future<bool> checkIfUserLoggedIn() async {
     SharedPreferences _sharedPrefs = await SharedPreferences.getInstance();
-    return _sharedPrefs.containsKey('user-data');
+    bool isLogin = _sharedPrefs.containsKey('user-data');
+    if (isLogin) {
+      await getUserInfo();
+    }
+    return isLogin;
   }
 }
