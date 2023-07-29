@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/data/models/network_response.dart';
+import 'package:mobile_application/data/services/network_caller.dart';
+import 'package:mobile_application/data/utils/urls.dart';
 import 'package:mobile_application/ui/screens/update_profile_screen.dart';
 import 'package:mobile_application/ui/widgets/user_profile_banner.dart';
 
@@ -13,6 +16,47 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
   final TextEditingController _titleTEController = TextEditingController();
   final TextEditingController _descriptionTEController =
       TextEditingController();
+
+  bool _addNewTaskInProgress = false;
+
+  Future<void> addNewTask() async {
+    _addNewTaskInProgress = true;
+    if (mounted) {
+      setState(() {});
+    }
+    Map<String, dynamic> requestBody = {
+      "title": _titleTEController.text.trim(),
+      "description": _descriptionTEController.text.trim(),
+      "status": "New"
+    };
+
+    final NetworkResponse response =
+        await NetworkCaller().postRequest(Urls.createTask, requestBody);
+
+    _addNewTaskInProgress = false;
+    if (mounted) {
+      setState(() {});
+    }
+    if (response.isSuccess) {
+      _titleTEController.clear();
+      _descriptionTEController.clear();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Task added successfully'),
+          ),
+        );
+      }
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Task adding failed'),
+          ),
+        );
+      }
+    }
+  }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -78,13 +122,19 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
                       ),
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            /*if (!_formKey.currentState!.validate()) {
-                              return;
-                            }*/
-                          },
-                          child: const Icon(Icons.arrow_forward_ios_outlined),
+                        child: Visibility(
+                          visible: _addNewTaskInProgress == false,
+                          replacement:
+                              const Center(child: CircularProgressIndicator()),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (!_formKey.currentState!.validate()) {
+                                return;
+                              }
+                              addNewTask();
+                            },
+                            child: const Icon(Icons.arrow_forward_ios_outlined),
+                          ),
                         ),
                       ),
                     ],
