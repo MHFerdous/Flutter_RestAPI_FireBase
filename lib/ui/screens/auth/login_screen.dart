@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_application/data/models/auth_utility.dart';
+import 'package:mobile_application/data/models/login_model.dart';
 import 'package:mobile_application/data/models/network_response.dart';
 import 'package:mobile_application/data/services/network_caller.dart';
 import 'package:mobile_application/data/utils/urls.dart';
@@ -38,6 +40,8 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {});
     }
     if (response.isSuccess) {
+      LoginModel model = LoginModel.fromJson(response.body!);
+     await AuthUtility.saveUserInfo(model);
       if (mounted) {
         Navigator.pushAndRemoveUntil(
             context,
