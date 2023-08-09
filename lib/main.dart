@@ -1,72 +1,54 @@
 import 'package:flutter/material.dart';
-//import 'home_screen.dart';
 
-main() {
-  runApp(const MyApp());
+void main() {
+  runApp(
+    const MYCounterApp(),
+  );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class MYCounterApp extends StatelessWidget {
+  const MYCounterApp({Key? key}) : super(key: key);
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-bool iconBool = false;
-IconData iconLight = Icons.wb_sunny;
-IconData iconDark = Icons.nights_stay;
-
-ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  primarySwatch: Colors.red,
-);
-
-ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: Colors.red,
-);
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TODO',
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.grey.shade700,
-          title: const Text(
-            'TODO App',
-            style: TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          centerTitle: true,
-          leading: IconButton(
-            onPressed: () {
-              setState(() {
-                iconBool = !iconBool;
-              });
-            },
-            icon: const Icon(Icons.dark_mode),
-          ),
+    return const MaterialApp(
+      home: HomeScreen(),
+    );
+  }
+}
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int count = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('GetX'),
+      ),
+      body: Center(
+        child: Text(
+          count.toString(),
+          style: const TextStyle(fontSize: 100),
         ),
       ),
-      theme: iconBool ? darkTheme : lightTheme,
-      themeMode: ThemeMode.dark,
-      /*theme: ThemeData(
-          brightness: Brightness.light,
-          primarySwatch: Colors.red,
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.blueGrey,
-          )),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.red,
-        // it will not work now as the color of the buttons are already applied from button widgets
-        floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Colors.green,
-        ),
-      ),*/
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          count++;
+          if(mounted){
+            setState(() {
+
+            });
+          }
+        },
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
