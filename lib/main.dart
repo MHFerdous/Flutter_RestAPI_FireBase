@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(
@@ -11,21 +12,19 @@ class MYCounterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       home: HomeScreen(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class HomeScreen extends StatelessWidget {
+  HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
+  final CounterController counterController = Get.put(
+    CounterController(),
+  );
 
-class _HomeScreenState extends State<HomeScreen> {
-  int count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,22 +32,26 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('GetX'),
       ),
       body: Center(
-        child: Text(
-          count.toString(),
+          child: Obx(
+        () => Text(
+          counterController.count.toString(),
           style: const TextStyle(fontSize: 100),
         ),
-      ),
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          count++;
-          if(mounted){
-            setState(() {
-
-            });
-          }
+          counterController.increment();
         },
         child: const Icon(Icons.add),
       ),
     );
+  }
+}
+
+class CounterController extends GetxController {
+  RxInt count = 0.obs;
+
+  void increment() {
+    count++;
   }
 }
