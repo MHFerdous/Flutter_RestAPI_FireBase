@@ -32,12 +32,13 @@ class HomeScreen extends StatelessWidget {
         title: const Text('GetX'),
       ),
       body: Center(
-          child: Obx(
-        () => Text(
-          counterController.count.toString(),
-          style: const TextStyle(fontSize: 100),
+        child: Obx(
+          () => Text(
+            counterController.count.toString(),
+            style: const TextStyle(fontSize: 100),
+          ),
         ),
-      )),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           counterController.increment();
