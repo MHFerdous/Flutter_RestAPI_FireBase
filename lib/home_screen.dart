@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobile_application/carts_screen.dart';
-import 'package:mobile_application/check_out_screen.dart';
+import 'package:mobile_application/counter_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final CounterController _counterController = Get.put(
+    CounterController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -17,30 +25,16 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () async {
-                final Params? result = await Get.to(
-                  const CartsScreen(),
+              onPressed: () {
+                _counterController.increment();
+                _counterController.decrement();
+                Get.to(
+                  CounterScreen(),
 
                   /// Navigator.push
                 );
-                if (result != null) {
-                  print(result.name);
-                  print(result.age);
-                }
               },
-              child: const Text('Carts'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.off(
-                  const CheckOutScreen(
-                    massage: 'Hello',
-                  ),
-
-                  /// Navigator.replace
-                );
-              },
-              child: const Text('Check Out'),
+              child: const Text('Counter Screen'),
             ),
           ],
         ),
