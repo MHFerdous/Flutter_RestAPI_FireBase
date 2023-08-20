@@ -33,17 +33,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-
-
   Future<void> getDataFromFirebase() async {
-    CollectionReference basketBallRef = firebaseFirestore.collection('basketball');
-    final DocumentReference documentReference = basketBallRef.doc('2023_ban_vs_ind');
+    CollectionReference basketBallRef =
+        firebaseFirestore.collection('basketball');
+    final DocumentReference documentReference =
+        basketBallRef.doc('2023_ban_vs_ind');
     final data = await documentReference.get();
     print(data.data());
-
   }
+
   @override
-  void initState(){
+  void initState() {
     getDataFromFirebase();
     super.initState();
   }
@@ -54,52 +54,77 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('BasketBall Live'),
       ),
-      body: Center(
-        child: Column(
-
-          children: [
-            const SizedBox(
-              height: 100,
-            ),
-            Text(
-              'Match Name',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
+      body: FutureBuilder(
+        future: firebaseFirestore
+            .collection('basketball')
+            .doc('2023_ban_vs_ind')
+            .get(),
+        builder: (context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
+          print(snapshot.data?.data());
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            }
+            if (snapshot.hasData) {
+              final score = snapshot.data!;
+              return Center(
+                child: Column(
                   children: [
-                    Text(
-                      '12',
-                      style: Theme.of(context).textTheme.titleLarge,
+                    const SizedBox(
+                      height: 100,
                     ),
                     Text(
-                      'Team name',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      score.get('match_name'),
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              score.get('score_team_a').toString(),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            Text(
+                              score.get('team_a'),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ],
+                        ),
+                        const Text('vs'),
+                        Column(
+                          children: [
+                            Text(
+                              score.get('score_team_b').toString(),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                            Text(
+                              score.get('team_b'),
+                              style: Theme.of(context).textTheme.titleLarge,
+                            ),
+                          ],
+                        )
+                      ],
+                    )
                   ],
                 ),
-                const Text('vs'),
-                Column(
-                  children: [
-                    Text(
-                      '12',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    Text(
-                      'Team name',
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
+              );
+            } else {
+              return const SizedBox();
+            }
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
