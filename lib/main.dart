@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,6 +8,9 @@ Future<void> main() async {
 
   await Firebase.initializeApp();
   await FirebaseNotificationHandler().initialization();
+  FirebaseNotificationHandler().onTokenRefresh();
+  print(await FirebaseNotificationHandler().getToken());
+  FirebaseNotificationHandler().subscribeToTopic('ostad');
 
   runApp(
     const BasketBallLiveScoreApp(),
@@ -41,7 +43,7 @@ class HomeScreen extends StatelessWidget {
             .doc('2023_ban_vs_ind')
             .snapshots(),
         builder: (context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
-          log(snapshot.data!.data().toString());
+          print(snapshot.data?.data());
 
           if (snapshot.hasData) {
             final score = snapshot.data!;
