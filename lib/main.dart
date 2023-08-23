@@ -1,114 +1,37 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:mobile_application/firebase_notification_handler.dart';
+import 'package:get/get.dart';
+import 'package:mobile_application/register_screen.dart';
+import 'package:ostad_flutter_batch_two/register_screen.dart';
+import '/modules/splash_screen.dart';
+import 'fcm_utils.dart';
+
+@pragma('vm:entry-point')
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("Handling a background message: ${message.messageId}");
+  print(
+      "Handling a background message: ${message.notification?.title.toString()}");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp();
-  await FirebaseNotificationHandler().initialization();
-  FirebaseNotificationHandler().onTokenRefresh();
-  print(await FirebaseNotificationHandler().getToken());
-  FirebaseNotificationHandler().subscribeToTopic('ostad');
-
-  runApp(
-    const BasketBallLiveScoreApp(),
-  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  runApp(const FoodApp());
 }
 
-class BasketBallLiveScoreApp extends StatelessWidget {
-  const BasketBallLiveScoreApp({Key? key}) : super(key: key);
+class FoodApp extends StatelessWidget {
+  const FoodApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomeScreen(),
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('BasketBall Live'),
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('basketball')
-            .doc('2023_ban_vs_ind')
-            .snapshots(),
-        builder: (context, AsyncSnapshot<DocumentSnapshot<Object?>> snapshot) {
-          print(snapshot.data?.data());
-
-          if (snapshot.hasData) {
-            final score = snapshot.data!;
-            return Center(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 100,
-                  ),
-                  Text(
-                    score.get('match_name'),
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          Text(
-                            score.get('score_team_a').toString(),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            score.get('team_a'),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      ),
-                      const Text('vs'),
-                      Column(
-                        children: [
-                          Text(
-                            score.get('score_team_b').toString(),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                          Text(
-                            score.get('team_b'),
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          FirebaseFirestore.instance
-              .collection('basketball')
-              .doc('2023_ban_vs_ind')
-              .update({'match_name': "Bangladesh vs India"});
-        },
-        child: const Text('Update'),
-      ),
+    return const GetMaterialApp(
+      themeMode: ThemeMode.dark,
+      debugShowCheckedModeBanner: false,
+      //home: SplashScreen(),
+      home: RegisterScreen(),
     );
   }
 }
