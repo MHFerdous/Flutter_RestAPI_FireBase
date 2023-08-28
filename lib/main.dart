@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
@@ -26,10 +27,45 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void getMyLocation() async{
-    LocationData location = await Location.instance.getLocation();
-    print(location);
+  LocationData? myCurrentLocation;
+  late StreamSubscription _locationSubscription;
+
+  void getMyLocation() async {
+    await Location.instance.requestPermission().then(
+      (requestedPermission) {
+        print(requestedPermission);
+      },
+    );
+    await Location.instance.hasPermission().then(
+      (permissionStatus) {
+        print(permissionStatus);
+      },
+    );
+    myCurrentLocation = await Location.instance.getLocation();
+    print(myCurrentLocation);
+    if (mounted) {
+      setState(() {});
+    }
   }
+
+  void listenToMyLocation() {
+    _locationSubscription = Location.instance.onLocationChanged.listen(
+      (location) {
+        if (location != myCurrentLocation) {
+          myCurrentLocation = location;
+          print('Listening to location $location');
+          if (mounted) {
+            setState(() {});
+          }
+        }
+      },
+    );
+  }
+
+  void stopToListenLocation() {
+    _locationSubscription.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,13 +73,43 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Google Location'),
       ),
       body: Center(
-        child: Text('My location'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('My location:'),
+            Text('${myCurrentLocation?.latitude ?? ''}'
+                ' ${myCurrentLocation?.longitude ?? ''}'),
+          ],
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          getMyLocation();
-        },
-        child: const Icon(Icons.my_location_outlined),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              listenToMyLocation();
+            },
+            child: const Icon(Icons.location_on_outlined),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              getMyLocation();
+            },
+            child: const Icon(Icons.my_location_outlined),
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          FloatingActionButton(
+            onPressed: () {
+              stopToListenLocation();
+            },
+            child: const Icon(Icons.stop_circle_outlined),
+          ),
+        ],
       ),
     );
   }
