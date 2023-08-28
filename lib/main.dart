@@ -28,7 +28,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   LocationData? myCurrentLocation;
-  late StreamSubscription _locationSubscription;
+  StreamSubscription? _locationSubscription;
+
+  @override
+  void initState() {
+    initialize();
+    super.initState();
+  }
+
+  void initialize() {
+    Location.instance.changeSettings(
+        distanceFilter: 10,
+        accuracy: LocationAccuracy.balanced,
+        interval: 3000);
+  }
 
   void getMyLocation() async {
     await Location.instance.requestPermission().then(
@@ -63,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void stopToListenLocation() {
-    _locationSubscription.cancel();
+    _locationSubscription?.cancel();
   }
 
   @override
@@ -76,9 +89,15 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('My location:'),
-            Text('${myCurrentLocation?.latitude ?? ''}'
-                ' ${myCurrentLocation?.longitude ?? ''}'),
+            const Text(
+              'My location:',
+              style: TextStyle(fontSize: 25),
+            ),
+            Text(
+              '${myCurrentLocation?.latitude ?? ''}'
+              ' ${myCurrentLocation?.longitude ?? ''}',
+              style: const TextStyle(fontSize: 16),
+            ),
           ],
         ),
       ),
@@ -112,5 +131,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _locationSubscription?.cancel();
+    super.dispose();
   }
 }
