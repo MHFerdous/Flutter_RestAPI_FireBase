@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
 void main() {
-  runApp(
-    const GPSLocationApp(),
-  );
+  runApp(const GPSLocationApp());
 }
 
 class GPSLocationApp extends StatelessWidget {
@@ -32,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
+    getMyLocation();
     initialize();
     super.initState();
   }
@@ -39,21 +38,18 @@ class _HomeScreenState extends State<HomeScreen> {
   void initialize() {
     Location.instance.changeSettings(
         distanceFilter: 10,
-        accuracy: LocationAccuracy.balanced,
-        interval: 3000);
+        accuracy: LocationAccuracy.high,
+        interval: 10000
+    );
   }
 
   void getMyLocation() async {
-    await Location.instance.requestPermission().then(
-      (requestedPermission) {
-        print(requestedPermission);
-      },
-    );
-    await Location.instance.hasPermission().then(
-      (permissionStatus) {
-        print(permissionStatus);
-      },
-    );
+    await Location.instance.requestPermission().then((requestedPermission) {
+      print(requestedPermission);
+    });
+    await Location.instance.hasPermission().then((permissionStatus)  {
+      print(permissionStatus);
+    });
     myCurrentLocation = await Location.instance.getLocation();
     print(myCurrentLocation);
     if (mounted) {
@@ -62,17 +58,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void listenToMyLocation() {
-    _locationSubscription = Location.instance.onLocationChanged.listen(
-      (location) {
-        if (location != myCurrentLocation) {
-          myCurrentLocation = location;
-          print('Listening to location $location');
-          if (mounted) {
-            setState(() {});
+    _locationSubscription =
+        Location.instance.onLocationChanged.listen((location) {
+          if (location != myCurrentLocation) {
+            myCurrentLocation = location;
+            print('listening to location $location');
+            if (mounted) {
+              setState(() {});
+            }
           }
-        }
-      },
-    );
+        });
   }
 
   void stopToListenLocation() {
@@ -83,21 +78,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Google Location'),
+        title: const Text('My Location'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'My location:',
-              style: TextStyle(fontSize: 25),
-            ),
-            Text(
-              '${myCurrentLocation?.latitude ?? ''}'
-              ' ${myCurrentLocation?.longitude ?? ''}',
-              style: const TextStyle(fontSize: 16),
-            ),
+            const Text('my location'),
+            Text('${myCurrentLocation?.latitude ?? ''} '
+                '${myCurrentLocation?.longitude ?? ''} '),
           ],
         ),
       ),
@@ -108,25 +97,21 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               listenToMyLocation();
             },
-            child: const Icon(Icons.location_on_outlined),
+            child: const Icon(Icons.location_on),
           ),
-          const SizedBox(
-            width: 16,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              getMyLocation();
-            },
-            child: const Icon(Icons.my_location_outlined),
-          ),
-          const SizedBox(
-            width: 16,
-          ),
+          const SizedBox(width: 16,),
           FloatingActionButton(
             onPressed: () {
               stopToListenLocation();
             },
             child: const Icon(Icons.stop_circle_outlined),
+          ),
+          const SizedBox(width: 16,),
+          FloatingActionButton(
+            onPressed: () {
+              getMyLocation();
+            },
+            child: const Icon(Icons.my_location),
           ),
         ],
       ),
