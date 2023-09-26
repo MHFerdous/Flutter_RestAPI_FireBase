@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:mobile_application/second_screen.dart';
 
@@ -115,3 +116,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+*/

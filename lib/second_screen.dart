@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 
 class SecondScreen extends StatelessWidget {
@@ -8,3 +9,4 @@ class SecondScreen extends StatelessWidget {
     return Scaffold();
   }
 }
+*/
