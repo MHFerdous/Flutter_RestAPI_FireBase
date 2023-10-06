@@ -8,151 +8,59 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  bool pressed = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Size Selector'),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+        appBar: AppBar(
+          title: const Text('MY Bag'),
+        ),
+        body: Column(
           children: [
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'S',
-                      style: TextStyle(color: Colors.white),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                leading: Container(
+                  width: 100,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(
+                          'https://th.bing.com/th/id/R.0e1b8d7164e70210853eb639398272d0?rik=SCPYuamufkGxKQ&riu=http%3a%2f%2fpixel.nymag.com%2fimgs%2fdaily%2fstrategist%2f2019%2f06%2f19%2fsunglasses-16.jpg&ehk=Q5umfOAxGOk%2bBvMHat51u8xvz49isFjcjyC9KvsprAE%3d&risl=&pid=ImgRaw&r=0'),
+                      fit: BoxFit.cover,
+                    ),
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8),
                     ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'M',
-                      style: TextStyle(color: Colors.white),
+                title: Text('asfgsd'),
+                subtitle: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text('Color: '),
+                        Text(
+                          'Black',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        Text(' Size: '),
+                        Text(
+                          'L',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ],
                     ),
-                  ),
+                    Row(
+                      children: [
+                        ElevatedButton(onPressed: () {}, child: Icon(Icons.add))
+                      ],
+                    )
+                  ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'L',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'XL',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'XXL',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      pressed = !pressed;
-                    });
-
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.all(8),
-                    height: 40,
-                    width: 70,
-                    decoration: pressed
-                        ? const BoxDecoration(color: Colors.amber)
-                        : BoxDecoration(color: Colors.grey.shade500),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'XXXL',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ],
+                trailing: Icon(Icons.add),
+              ),
             )
           ],
-        ),
-      ),
-    );
+        ));
   }
 }
