@@ -15,11 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int priceOfSecondProduct = 30;
   int priceOfThirdProduct = 45;
 
-  void totalPrice() {
-    setState(() {});
-    int price =
-        priceOfFirstProduct + priceOfSecondProduct + priceOfThirdProduct;
-  }
+
 
   @override
   Widget build(BuildContext context) {
