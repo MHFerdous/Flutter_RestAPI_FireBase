@@ -1,4 +1,3 @@
-///import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -73,7 +72,6 @@ class HomeScreen extends StatelessWidget {
               fill: 1,
             ),
             Image.network(
-              ///  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
               'https://1.bp.blogspot.com/-N9urImzUkzw/UWjpuBgRnoI/AAAAAAAA_Qc/SJNkxoaCBRc/s1600/NATOT133.JPG',
               width: 500,
               height: 100,
