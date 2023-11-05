@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-///Appbar and Body
-
 void main() {
   runApp(
     MyApp(appName: 'Hello App'),
@@ -11,15 +9,20 @@ void main() {
 class MyApp extends StatelessWidget {
   final String appName;
 
-  const MyApp({required this.appName});
+  const MyApp({super.key, required this.appName});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: appName, home: HomeScreen());
+    return MaterialApp(
+      title: appName,
+      home: HomeScreen(),
+    );
   }
 }
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
