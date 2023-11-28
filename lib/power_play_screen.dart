@@ -76,7 +76,7 @@ class _PowerPlayScreenState extends State<PowerPlayScreen> {
                           border: Border.all(
                               color: tappedIndex != null
                                   ? Colors.yellow
-                                  : Colors.white70)),
+                                  : Colors.white24)),
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8, top: 8),
                         child: Text(
