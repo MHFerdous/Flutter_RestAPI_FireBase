@@ -39,27 +39,29 @@ class HomeScreen extends StatelessWidget {
             children: [
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightGreen,
-                    minimumSize: Size(50, 50),
-                    maximumSize: Size(100, 100),
-                    elevation: 15,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    shadowColor: Colors.green,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(500),
-                      side: BorderSide(color: Colors.green, width: 3),
-                    )),
+                  backgroundColor: Colors.lightGreen,
+                  minimumSize: Size(50, 50),
+                  maximumSize: Size(100, 100),
+                  elevation: 15,
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  shadowColor: Colors.green,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(500),
+                    side: BorderSide(color: Colors.green, width: 3),
+                  ),
+                ),
                 onPressed: () {},
                 child: Text('Button'),
               ),
               TextButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.white24,
-                    elevation: 15,
-                    shadowColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
-                    )),
+                  backgroundColor: Colors.white24,
+                  elevation: 15,
+                  shadowColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
                 onPressed: () {},
                 child: Text('Text Button'),
               ),
