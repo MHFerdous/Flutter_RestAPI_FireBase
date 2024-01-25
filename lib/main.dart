@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                 style: IconButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: Colors.black,
-                  iconSize: 5550,
+                  iconSize: 20,
                   shadowColor: Colors.black,
                   elevation: 15,
                 ),
